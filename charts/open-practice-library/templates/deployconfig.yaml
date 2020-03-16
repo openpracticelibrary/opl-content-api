@@ -2,21 +2,22 @@
 {{- range $dc := .Values.deploymentconfigs }}
 ---
 apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+kind: Deployment
 metadata:
   name: {{ $dc.name }}
   namespace: {{ $dc.namespace | default $.Values.namespace | quote }}
 spec:
   replicas: {{ $dc.replicas | default "1" }}
   selector:
-    deploymentConfig: "{{ $dc.name }}"
+    matchLabels:
+      app: "{{ $dc.name }}"
+      release: "{{ $dc.name }}"
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        deploymentConfig: "{{ $dc.name }}"
-      name: "{{ $dc.name }}"
+        app: "{{ $dc.name }}"
     spec:
       containers:
       - env:
@@ -39,15 +40,5 @@ spec:
 {{ toYaml $dc.volumes | indent 6 }}
 {{- end }}
       terminationGracePeriodSeconds: 60
-  triggers:
-  - imageChangeParams:
-      automatic: true
-      containerNames:
-      - "{{ $dc.name }}"
-      from:
-        kind: ImageStreamTag
-        name: "{{ $dc.image_name | default $.Values.app_name }}:{{ $dc.image_version }}"
-    type: ImageChange
-  - type: ConfigChange
 {{- end }}
 {{- end }}

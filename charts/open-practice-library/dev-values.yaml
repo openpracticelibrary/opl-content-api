@@ -1,5 +1,13 @@
 app_name: "open-practice-library-cms"
-namespace: "opl-dev"
+namespace: "shahein"
+
+builds:
+  - name: "open-practice-library-cms"
+    trigger_type: "GitHub"
+    source_repo: "https://github.com/shaheinm/open-practice-library-cms.git"
+    source_repo_ref: "master"
+    builder_image_name: "nodejs"
+    builder_image_tag: "10"
 
 imagestreams:
   - name: open-practice-library-cms
@@ -15,7 +23,7 @@ services:
 
 route:
   - name: open-practice-library-cms
-    namespace: opl-dev
+    namespace: shahein
     port:
       targetPort: 1337
     to:
@@ -24,14 +32,14 @@ route:
       weight: 100
 
 deploymentconfigs:
-  - namespace: opl-dev
+  - namespace: shahein
     name: open-practice-library-cms
     replicas: 1
     env_vars:
       - name: "NODE_ENV"
         value: "production"
       - name: "DATABASE_HOST"
-        value: "opl-mongo"
+        value: "opl-mongodb"
     ports:
         - containerPort: 1337
           name: http
