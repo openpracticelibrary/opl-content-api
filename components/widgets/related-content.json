@@ -1,0 +1,17 @@
+{
+  "connection": "default",
+  "collectionName": "components_widgets_related_contents",
+  "info": {
+    "name": "RelatedContent",
+    "icon": "server"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

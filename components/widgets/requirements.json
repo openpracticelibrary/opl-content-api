@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "components_widgets_requirements",
+  "info": {
+    "name": "requirements",
+    "icon": "list-ul"
+  },
+  "options": {},
+  "attributes": {
+    "time": {
+      "type": "string"
+    },
+    "difficulty": {
+      "type": "string"
+    },
+    "people": {
+      "type": "string"
+    },
+    "participants": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{{- if .Values.route }}
+{{- range $route := .Values.route }}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ $route.name}}
+  namespace: {{ $route.namespace }}
+spec:
+  host: ''
+  {{- if $route.port }}
+  port:
+    targetPort: {{ $route.port.targetPort }}
+  {{- end }}
+  to:
+{{ toYaml $route.to | indent 4 }}
+  {{- if $route.alternateBackends }}
+{{ toYaml $route.alternateBackends | indent 4 }}
+  {{- end}}
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    host: hackaround-a-bug.com # https://github.com/openshift/origin/issues/24060
+    routerCanonicalHostname: apps.s43.core.rht-labs.com
+    routerName: default
+    wildcardPolicy: None
+{{- end}}
+{{- end}}
+

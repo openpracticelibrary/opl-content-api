@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "components_widgets_bylines",
+  "info": {
+    "name": "byline",
+    "icon": "address-card"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "name": {
+      "type": "string"
+    },
+    "mediaLink": {
+      "type": "string"
+    }
+  }
+}

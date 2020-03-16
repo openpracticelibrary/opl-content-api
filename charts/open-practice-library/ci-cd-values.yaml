@@ -1,0 +1,30 @@
+app_name: "open-practice-library-cms"
+namespace: "argo-cd"
+dev_namespace: "opl-dev"
+
+imagestreams:
+  - name: open-practice-library-cms
+
+builds:
+  - name: "open-practice-library-cms"
+    secret_name: "github-auth"
+    trigger_type: "GitHub"
+    source_repo: "https://github.com/rht-labs/open-practice-library-cms.git"
+    source_repo_ref: "master"
+    builder_image_name: "nodejs"
+    builder_image_tag: "10"
+
+pipelines:
+  - name: "open-practice-library-cms"
+    secret_name: "github-auth"
+    trigger_type: "GitHub"
+    source_repo: "https://github.com/rht-labs/open-practice-library-cms"
+    source_repo_ref: "master"
+
+argodeploys:
+  - env: dev
+    repoUrl: https://github.com/rht-labs/open-practice-library-cms.git
+    path: "charts/open-practice-library"
+    namespace: opl-dev
+    targetRevision: master
+    valueFile: dev-values.yaml

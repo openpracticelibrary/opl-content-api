@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "components_widgets_related_images",
+  "info": {
+    "name": "relatedImages",
+    "icon": "camera"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "collection": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}
