@@ -771,6 +771,59 @@
                 }
               }
             }
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "upvotes": {
+            "type": "integer"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                },
+                "articles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "commentDateTime": {
+                  "type": "datetime"
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "article": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -977,6 +1030,24 @@
                   }
                 }
               }
+            }
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "upvotes": {
+            "type": "integer"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         }

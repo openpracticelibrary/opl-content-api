@@ -49,6 +49,21 @@
       "type": "component",
       "repeatable": true,
       "component": "widgets.related-images"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "upvotes": {
+      "type": "integer"
+    },
+    "tags": {
+      "collection": "tags",
+      "via": "articles",
+      "dominant": true
+    },
+    "comments": {
+      "via": "article",
+      "collection": "comments"
     }
   }
 }
