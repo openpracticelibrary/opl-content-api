@@ -17,9 +17,92 @@ The application's admin UI is available at `http://localhost:1337/admin`.
 
 You can check the Strapi documentation above for how to reason about the code, and how to develop within the platform.
 
-## API Documentation
+## GraphQL
 
 The application exposes a GraphQL API and a GraphQL Playground, where you can read the schema and docs.  You can find that information, if you're running the application locally, at `http://localhost:1337/graphql`, or [here](http://open-practice-library-cms-opl-dev.apps.s43.core.rht-labs.com/graphql).
 
-You can find a Swagger API document, for more traditional API requests, locally at `http://localhost:1337/documentation/v1.0.0#/`, or [here](http://open-practice-library-cms-opl-dev.apps.s43.core.rht-labs.com/documentation/v1.0.0#/).
+### Example Queries
+- List of Articles/Practices
+```
+query articles {
+  articles{
+    id
+    title
+    comments {
+      id
+    }
+    upvotes
+    image {
+      url
+    }
+  }
+}
+```
+- List of Articles by Tag
+```
+query tags {
+  tags{
+    tag
+    articles {
+      id
+      title
+      comments {
+        id
+      }
+      upvotes
+      image {
+        url
+      }
+    }
+  }
+}
+```
+- Full Article
+```
+query article {
+  article(id: "uuid-for-your-article"){
+    updatedAt
+    title
+    subtitle
+    author{
+      firstName
+      lastName
+      avatar{
+        url
+      }
+    }
+    image{
+      url
+    }
+    body
+    Links {
+      name
+      link
+    }
+    requirements
+    RelatedContent {
+      name
+      Link
+    }
+    relatedImages {
+      image{
+        url
+      }
+    }
+    upvotes
+    comments{
+      updatedAt
+      username
+      comment
+    }
+    tags{
+      id
+      tag
+    }
+  }
+}
+```
 
+## Swagger API docs
+
+You can find a Swagger API document, for more traditional API requests, locally at `http://localhost:1337/documentation/v1.0.0#/`, or [here](http://open-practice-library-cms-opl-dev.apps.s43.core.rht-labs.com/documentation/v1.0.0#/).
