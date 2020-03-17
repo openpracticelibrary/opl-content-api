@@ -23,7 +23,7 @@ services:
 
 route:
   - name: open-practice-library-cms
-    namespace: shahein
+    namespace: opl-dev
     port:
       targetPort: 1337
     to:
@@ -32,7 +32,7 @@ route:
       weight: 100
 
 deploymentconfigs:
-  - namespace: shahein
+  - namespace: opl-dev
     name: open-practice-library-cms
     replicas: 1
     env_vars:
