@@ -37,11 +37,9 @@ deploymentconfigs:
     replicas: 1
     env_vars:
       - name: "NODE_ENV"
-        value: "development"
+        value: "production"
       - name: "DATABASE_HOST"
         value: "opl-mongodb"
-      - name: "DATABASE_NAME"
-        value: "open-practice-library"
     ports:
         - containerPort: 1337
           name: http

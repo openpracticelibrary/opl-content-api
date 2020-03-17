@@ -20,8 +20,8 @@
       "type": "text"
     },
     "article": {
-      "model": "article",
-      "via": "comments"
+      "via": "comments",
+      "model": "article"
     }
   }
 }

@@ -608,6 +608,18 @@
                 },
                 "role": {
                   "type": "string"
+                },
+                "avatar": {
+                  "type": "string"
+                },
+                "mediaLink": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
                 }
               }
             }

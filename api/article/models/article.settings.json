@@ -34,12 +34,6 @@
       "repeatable": false,
       "component": "widgets.requirements"
     },
-    "byline": {
-      "type": "component",
-      "repeatable": false,
-      "component": "widgets.byline",
-      "required": true
-    },
     "RelatedContent": {
       "type": "component",
       "repeatable": true,
@@ -62,8 +56,12 @@
       "dominant": true
     },
     "comments": {
-      "via": "article",
-      "collection": "comments"
+      "collection": "comments",
+      "via": "article"
+    },
+    "author": {
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

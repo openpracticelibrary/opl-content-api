@@ -535,8 +535,7 @@
             "required": [
               "id",
               "title",
-              "body",
-              "byline"
+              "body"
             ],
             "properties": {
               "id": {
@@ -558,9 +557,6 @@
                 "type": "component"
               },
               "requirements": {
-                "type": "component"
-              },
-              "byline": {
                 "type": "component"
               },
               "RelatedContent": {
@@ -586,6 +582,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "author": {
+                "type": "string"
               }
             }
           }
