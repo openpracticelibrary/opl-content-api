@@ -11,14 +11,14 @@ imagestreams:
 build:
   secret_name: "github-auth"
   trigger_type: "github"
-  source_repo: "https://github.com/shaheinm/open-practice-library-cms.git"
+  source_repo: "https://github.com/rht-labs/open-practice-library-cms.git"
   source_repo_ref: "master"
   builder_image_name: "nodejs"
   builder_image_tag: "10"
 
 argodeploys:
   - env: dev
-    repoUrl: https://github.com/shaheinm/open-practice-library-cms.git
+    repoUrl: https://github.com/rht-labs/open-practice-library-cms.git
     namespace: opl-dev
     targetRevision: master
     values: |

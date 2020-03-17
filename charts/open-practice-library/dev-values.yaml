@@ -1,10 +1,10 @@
 app_name: "open-practice-library-cms"
-namespace: "shahein"
+namespace: "opl-dev"
 
 builds:
   - name: "open-practice-library-cms"
     trigger_type: "GitHub"
-    source_repo: "https://github.com/shaheinm/open-practice-library-cms.git"
+    source_repo: "https://github.com/rht-labs/open-practice-library-cms.git"
     source_repo_ref: "master"
     builder_image_name: "nodejs"
     builder_image_tag: "10"
