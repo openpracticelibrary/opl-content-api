@@ -79,10 +79,15 @@ query article {
       name
       link
     }
-    requirements
+    requirements{
+      people
+      participants
+      time
+      difficulty
+    }
     RelatedContent {
       name
-      Link
+      link
     }
     relatedImages {
       image{
