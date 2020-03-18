@@ -1,0 +1,2 @@
+{ "query": "mutation (file: $imageUpload1) { id, url } }", "variables": { "imageUpload1": null } }
+

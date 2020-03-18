@@ -107,6 +107,23 @@ query article {
   }
 }
 ```
+- Add a New Article
+
+There is a createArticle mutation query in `examples/createArticle.json` for you to try, **you will need to swap the various IDs for real ones in your running app for them to map correctly**.  Then you can run:
+```
+curl -X POST -H "Content-Type: application/json" -d @examples/createArticle.json http://localhost:1337/graphql
+```
+- Add a New Image
+
+There is a createImage mutation query in `examples/createImage.json`, however **you will need to copy the contents into your curl command/postman form data**.  The command will look like this:
+```
+curl -X POST \
+  http://localhost:1337/graphql \
+  -H "Content-Type: multipart/form-data" \
+  -F 'operations={"query": "mutation ($imageUpload1: Upload!) { upload( file: $imageUpload1) { id, url } }","variables": {"imageUpload1": null}}' \
+  -F 'map={ "z_image1": ["variables.imageUpload1"] }' \
+  -F 'z_image1=@examples/mobius-loop-logo.svg'
+```
 
 ## Swagger API docs
 

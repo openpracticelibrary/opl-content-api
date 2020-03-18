@@ -581,6 +581,12 @@
                 },
                 "author": {
                   "type": "string"
+                },
+                "coauthors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }

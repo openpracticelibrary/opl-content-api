@@ -68,6 +68,14 @@
     },
     "lastName": {
       "type": "string"
+    },
+    "articles": {
+      "via": "author",
+      "collection": "article"
+    },
+    "coArticles": {
+      "via": "coauthors",
+      "collection": "article"
     }
   }
 }

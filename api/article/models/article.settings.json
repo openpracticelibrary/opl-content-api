@@ -61,7 +61,14 @@
     },
     "author": {
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "articles"
+    },
+    "coauthors": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "coArticles",
+      "dominant": true
     }
   }
 }
