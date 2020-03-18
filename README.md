@@ -111,7 +111,10 @@ query article {
 
 There is a createArticle mutation query in `examples/createArticle.json` for you to try, **you will need to swap the various IDs for real ones in your running app for them to map correctly**.  Then you can run:
 ```
-curl -X POST -H "Content-Type: application/json" -d @examples/createArticle.json http://localhost:1337/graphql
+curl -X POST \
+  http://localhost:1337/graphql \
+  -H "Content-Type: application/json" \
+  -d @examples/createArticle.json
 ```
 - Add a New Image
 
