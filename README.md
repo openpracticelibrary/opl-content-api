@@ -23,7 +23,7 @@ The application exposes a GraphQL API and a GraphQL Playground, where you can re
 
 ### Example Queries
 - List of Articles/Practices
-```
+```graphql
 query articles {
   articles{
     id
@@ -39,7 +39,7 @@ query articles {
 }
 ```
 - List of Articles by Tag
-```
+```graphql
 query tags {
   tags{
     tag
@@ -58,7 +58,7 @@ query tags {
 }
 ```
 - Full Article
-```
+```graphql
 query article {
   article(id: "uuid-for-your-article"){
     updatedAt
@@ -110,7 +110,7 @@ query article {
 - Add a New Article
 
 There is a createArticle mutation query in `examples/createArticle.json` for you to try, **you will need to swap the various IDs for real ones in your running app for them to map correctly**.  Then you can run:
-```
+```shell
 curl -X POST \
   http://localhost:1337/graphql \
   -H "Content-Type: application/json" \
@@ -119,7 +119,7 @@ curl -X POST \
 - Add a New Image
 
 There is a createImage mutation query in `examples/createImage.json`, however **you will need to copy the contents into your curl command/postman form data**.  The command will look like this:
-```
+```shell
 curl -X POST \
   http://localhost:1337/graphql \
   -H "Content-Type: multipart/form-data" \
