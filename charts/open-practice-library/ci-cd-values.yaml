@@ -9,7 +9,7 @@ builds:
   - name: "open-practice-library-cms"
     secret_name: "github-auth"
     trigger_type: "GitHub"
-    source_repo: "https://github.com/rht-labs/open-practice-library-cms.git"
+    source_repo: "https://gitlab.com/rht-opl/opl-cms.git"
     source_repo_ref: "master"
     builder_image_name: "nodejs"
     builder_image_tag: "10"
@@ -18,12 +18,12 @@ pipelines:
   - name: "open-practice-library-cms"
     secret_name: "github-auth"
     trigger_type: "GitHub"
-    source_repo: "https://github.com/rht-labs/open-practice-library-cms"
+    source_repo: "https://gitlab.com/rht-opl/opl-cms"
     source_repo_ref: "master"
 
 argodeploys:
   - env: dev
-    repoUrl: https://github.com/rht-labs/open-practice-library-cms.git
+    repoUrl: https://gitlab.com/rht-opl/opl-cms.git
     path: "charts/open-practice-library"
     namespace: opl-dev
     targetRevision: master
