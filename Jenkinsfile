@@ -56,14 +56,8 @@ pipeline {
     stage('Deploy to Dev'){
       agent { label 'jenkins-slave-helm' }
       steps {
-        script{
-          openshift.withCluster () {
-            openshift.withCredentials('jenkins-deploy-token') {
-              openshift.tag( "${BUILD}/${APP_NAME}:latest", "${DEV}/${APP_NAME}:${VERSION_TAG}" )
-            }
-          }
-        }
-        sh "helm upgrade -f charts/open-practice-library/dev-values.yaml --set builds.created_image_tag=${VERSION_TAG} opl-cms ."
+        tagImage(sourceImageName: "${BUILD}/${APP_NAME}:latest", sourceImagePath: "${DEV}/${APP_NAME}:${VERSION_TAG}" )
+        sh "cd charts/open-practice-library && helm upgrade -f dev-values.yaml --set deployment.created_image_tag=${VERSION_TAG} opl-cms ."
       }
     }
   }
