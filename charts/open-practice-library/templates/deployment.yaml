@@ -1,7 +1,7 @@
-{{- if .Values.deploymentconfigs }}
+{{- if .Values.deployment }}
 {{ $imagetag := .Values.builds.created_image_tag }}
 {{ $appname := .Values.app_name }}
-{{- range $dc := .Values.deploymentconfigs }}
+{{- range $dc := .Values.deployment }}
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -1,16 +1,21 @@
 app_name: "opl-cms"
 namespace: "opl-dev"
+cicd_namespace: "opl-ci-cd"
 
 builds:
+  namespace: opl-ci-cd
   created_image_tag: "0.0.1"
   trigger_type: "GitLab"
   source_repo: "https://gitlab.com/rht-opl/opl-cms.git"
   source_repo_ref: "master"
   builder_image_name: "nodejs"
   builder_image_tag: "10"
+  secret_name: "gitlab-webhook"
 
 imagestreams:
   enabled: true
+  cicd: true
+  namespace: opl-ci-cd
 
 services:
   - ports:
@@ -28,7 +33,7 @@ route:
       name: opl-cms
       weight: 100
 
-deploymentconfigs:
+deployment:
   - replicas: 1
     env_vars:
       - name: "NODE_ENV"

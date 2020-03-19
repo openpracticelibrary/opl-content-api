@@ -10,9 +10,10 @@ spec:
   nodeSelector: {}
   runPolicy: {{ .run_policy | default "Serial" | quote }}
   triggers:
-    - type: "GitLab"
-      gitlab:
-        secretReference: "gitlab-webhook"
+    - type: {{ .trigger_type }}
+      {{ .trigger_type | lower }}:
+        secretReference:
+          name: {{ .secret_name }}
     - type: "ConfigChange"
   source:
     contextDir: {{ .source_context_dir | default "" | quote }}

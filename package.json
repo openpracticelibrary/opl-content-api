@@ -1,8 +1,8 @@
 {
   "name": "open-practice-library",
   "private": true,
-  "version": "0.1.0",
-  "description": "A Strapi application",
+  "version": "0.1.1",
+  "description": "Strapi Headless CMS for OPL v2",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
