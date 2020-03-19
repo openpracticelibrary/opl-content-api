@@ -19,7 +19,7 @@ You can check the Strapi documentation above for how to reason about the code, a
 
 ## GraphQL
 
-The application exposes a GraphQL API and a GraphQL Playground, where you can read the schema and docs.  You can find that information, if you're running the application locally, at `http://localhost:1337/graphql`, or [here](http://open-practice-library-cms-opl-dev.apps.s43.core.rht-labs.com/graphql).
+The application exposes a GraphQL API and a GraphQL Playground, where you can read the schema and docs.  You can find that information, if you're running the application locally, at `http://localhost:1337/graphql`, or [here](http://opl-cms-opl-dev.apps.s43.core.rht-labs.com/graphql).
 
 ### Example Queries
 - List of Articles/Practices
@@ -130,4 +130,4 @@ curl -X POST \
 
 ## Swagger API docs
 
-You can find a Swagger API document, for more traditional API requests, locally at `http://localhost:1337/documentation/v1.0.0#/`, or [here](http://open-practice-library-cms-opl-dev.apps.s43.core.rht-labs.com/documentation/v1.0.0#/).
+You can find a Swagger API document, for more traditional API requests, locally at `http://localhost:1337/documentation/v1.0.0#/`, or [here](http://opl-cms-opl-dev.apps.s43.core.rht-labs.com/documentation/v1.0.0#/).
