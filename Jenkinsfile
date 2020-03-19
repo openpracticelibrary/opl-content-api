@@ -58,7 +58,7 @@ pipeline {
       steps {
         script{
           openshift.withCluster () {
-            openshift.withCredentials('Jenkins') {
+            openshift.withCredentials('jenkins-deploy-token') {
               openshift.tag( "${BUILD}/${APP_NAME}:latest", "${DEV}/${APP_NAME}:${VERSION_TAG}" )
             }
           }
