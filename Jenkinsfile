@@ -54,10 +54,15 @@ pipeline {
       }
     }
 
-    stage('Deploy to Dev'){
-      agent { label 'jenkins-slave-helm' }
+    stage('Promote to Dev'){
       steps {
         tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV, toImageName: env.APP_NAME, toImageTag: version )
+      }
+    }
+
+    stage('Deploy to Dev'){
+      agent { label 'jenkins-slave-helm' }
+      steps{
         sh "cd charts/open-practice-library && helm upgrade -f dev-values.yaml --set deployment.created_image_tag=${version} opl-cms ."
       }
     }
