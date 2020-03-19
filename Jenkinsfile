@@ -56,7 +56,7 @@ pipeline {
     stage('Deploy to Dev'){
       agent { label 'jenkins-slave-helm' }
       steps {
-        tagImage(sourceImageName: "${BUILD}/${APP_NAME}:latest", sourceImagePath: "${DEV}/${APP_NAME}:${VERSION_TAG}" )
+        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV, toImageName: env.APP_NAME, toImageTag: "${VERSION_TAG}" )
         sh "cd charts/open-practice-library && helm upgrade -f dev-values.yaml --set deployment.created_image_tag=${VERSION_TAG} opl-cms ."
       }
     }
