@@ -1,73 +1,30 @@
-{{- if .Values.build }}
-kind: "BuildConfig"
-apiVersion: "build.openshift.io/v1"
-metadata:
-  name: "{{ .Values.app_name }}-pipeline"
-  namespace: "{{ .Values.cicd_namespace }}"
-spec:
-  nodeSelector: {}
-  source:
-    type: Git
-    sourceSecret:
-      name: "{{ .Values.build.secret_name }}"
-    git:
-      uri: "{{ .Values.build.source_repo }}"
-      ref: {{ .Values.build.source_repo_ref | default "master" | quote }}
-    contextDir: {{ .Values.build.source_context_dir | default "" | quote }}
-  triggers:
-  - type: "{{ .Values.build.trigger_type }}"
-    {{ .Values.build.trigger_type | lower }}:
-      secret: {{ .Values.build.secret_name }}
-  - type: "ConfigChange"
-  strategy:
-    type: "JenkinsPipeline"
-    jenkinsPipelineStrategy:
-      jenkinsfilePath: {{ .Values.build.pipeline_script | default "Jenkinsfile" | quote }}
-      env:
-        - name: APP_NAME
-          value: "{{ .Values.app_name }}"
-        - name: DEV
-          value: "{{ .Values.dev_namespace }}"
-        - name: TEST
-          value: "{{ .Values.test_namespace }}"
-status:
-  lastVersion: 0
-{{- end }}
-
-{{- if .Values.pipelines }}
-{{- range .Values.pipelines }}
+{{- if .Values.builds }}
+{{- with .Values.builds }}
 ---
-kind: "BuildConfig"
-apiVersion: "build.openshift.io/v1"
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
 metadata:
-  name: "{{ .name }}-pipeline"
+  name: "{{ $.Values.app_name }}-pipeline"
   namespace: {{ .namespace | default $.Values.namespace | quote }}
 spec:
   nodeSelector: {}
+  runPolicy: {{ .run_policy | default "Serial" | quote }}
+  triggers:
+    - type: {{ .trigger_type }}
+      {{ .trigger_type | lower }}:
+        secretReference:
+          name: {{ .secret_name }}
+    - type: "ConfigChange"
   source:
-    type: Git
-    sourceSecret:
-      name: "{{ .secret_name }}"
+    contextDir: {{ .source_context_dir | default "" | quote }}
     git:
       uri: "{{ .source_repo }}"
       ref: {{ .source_repo_ref | default "master" | quote }}
-    contextDir: {{ .source_context_dir | default "" | quote }}
-  triggers:
-  - type: "{{ .trigger_type }}"
-    {{ .trigger_type | lower }}:
-      secret: {{ .secret_name }}
-  - type: "ConfigChange"
+    type: Git
   strategy:
     type: "JenkinsPipeline"
     jenkinsPipelineStrategy:
-      jenkinsfilePath: {{ .pipeline_script | default "Jenkinsfile" | quote }}
-      env:
-        - name: APP_NAME
-          value: "{{ $.Values.app_name }}"
-        - name: DEV
-          value: "{{ $.Values.dev_namespace }}"
-        - name: TEST
-          value: "{{ $.Values.test_namespace }}"
+      jenkinsfilePath: "Jenkinsfile"
 status:
   lastVersion: 0
 {{- end }}
