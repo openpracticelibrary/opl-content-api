@@ -1,5 +1,4 @@
 {{- if .Values.deployment }}
-{{ $imagetag := .Values.builds.created_image_tag }}
 {{ $appname := .Values.app_name }}
 {{- range $dc := .Values.deployment }}
 ---
@@ -24,7 +23,7 @@ spec:
       containers:
       - env:
 {{ toYaml $dc.env_vars | indent 8 }}
-        image: "{{ $dc.image_name | default $appname }}:{{ $imagetag }}"
+        image: "{{ $dc.image_name | default $appname }}:{{ $dc.created_image_tag }}"
         imagePullPolicy: Always
         name: "{{ $appname }}"
         ports:

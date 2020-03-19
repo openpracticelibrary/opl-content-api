@@ -4,7 +4,6 @@ cicd_namespace: "opl-ci-cd"
 
 builds:
   namespace: opl-ci-cd
-  created_image_tag: "0.0.1"
   trigger_type: "GitLab"
   source_repo: "https://gitlab.com/rht-opl/opl-cms.git"
   source_repo_ref: "master"
@@ -34,6 +33,7 @@ route:
       weight: 100
 
 deployment:
+  created_image_tag: "0.0.1"
   - replicas: 1
     env_vars:
       - name: "NODE_ENV"
