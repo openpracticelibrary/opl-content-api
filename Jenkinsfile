@@ -58,7 +58,7 @@ pipeline {
       steps {
         script{
           openshift.withCluster () {
-            openshift.tag( "${APP_NAME}:latest", "${APP_NAME}:${VERSION_TAG}" )
+            openshift.tag( "${BUILD}/${APP_NAME}:latest", "${DEV}/${APP_NAME}:${VERSION_TAG}" )
           }
         }
         sh "helm upgrade -f charts/open-practice-library/dev-values.yaml --set builds.created_image_tag=${VERSION_TAG} opl-cms ."
