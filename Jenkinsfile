@@ -14,6 +14,7 @@ openshift.withCluster() {
   env.APP_NAME = "opl-cms"
   env.BUILD = "opl-ci-cd"
   env.DEV = "opl-dev"
+  def version = ''
 
   echo "Starting Pipeline for ${APP_NAME}..."
 
@@ -25,20 +26,18 @@ pipeline {
    environment {
         NODE_ENV="production"
         DATABASE_HOST="opl-mongodb"
-        VERSION_TAG="""${sh(
-                        returnStdout: true,
-                        script: 'cat package.json | grep version | head -1 | awk -F: \'{ print $2 }\' | sed \'s/[",]//g\' '
-                    )}"""
    }
    stages {
     stage('Install') {
         steps{
-          sh "npm install"
+          sh "echo TODO: Implement unit tests, install here..."
+          version=sh(script: 'npm run version --silent', returnStdout: true).trim()
           }
     }
-    stage('QA'){
+    stage('Test'){
         steps{
-          sh "echo THIS IS WHERE INTEGRATION TESTING SHOULD HAPPEN"
+          sh "echo ${version}"
+          sh "echo THIS IS WHERE TESTING SHOULD HAPPEN"
         }
     }
 
@@ -56,8 +55,8 @@ pipeline {
     stage('Deploy to Dev'){
       agent { label 'jenkins-slave-helm' }
       steps {
-        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV, toImageName: env.APP_NAME, toImageTag: "${VERSION_TAG}" )
-        sh "cd charts/open-practice-library && helm upgrade -f dev-values.yaml --set deployment.created_image_tag=${VERSION_TAG} opl-cms ."
+        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV, toImageName: env.APP_NAME, toImageTag: version )
+        sh "cd charts/open-practice-library && helm upgrade -f dev-values.yaml --set deployment.created_image_tag=${version} opl-cms ."
       }
     }
   }
