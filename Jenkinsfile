@@ -11,10 +11,9 @@ retriever: modernSCM(
 openshift.withCluster() {
 
   env.NAMESPACE = openshift.project()
-  env.APP_NAME = "${env.APP_NAME}"
-  env.BUILD = "${env.NAMESPACE}"
-  env.DEV = "${env.DEV}"
-  env.TEST = "${env.TEST}"
+  env.APP_NAME = "opl-cms"
+  env.BUILD = "opl-ci-cd"
+  env.DEV = "opl-dev"
 
   echo "Starting Pipeline for ${APP_NAME}..."
 
@@ -25,46 +24,43 @@ pipeline {
    agent { label 'jenkins-slave-npm' }
    environment {
         NODE_ENV="production"
-        DATABASE_HOST="${DATABASE_HOST}"
+        DATABASE_HOST="opl-mongodb"
+        VERSION_TAG="""${sh(
+                        returnStdout: true,
+                        script: 'cat package.json | grep version | head -1 | awk -F: \'{ print $2 }\' | sed \'s/[",]//g\' '
+                    }}"""
    }
    stages {
-        stage('Install') {
-            steps{
-              sh "npm install"
-              }
+    stage('Install') {
+        steps{
+          sh "npm install"
+          }
+    }
+    stage('Build'){
+        steps{
+          sh "npm run build"
         }
-        stage('Build'){
-            steps{
-              sh "npm run build"
-            }
+    }
+
+    stage('Bake'){
+      steps{
+        script{
+          openshift.withCluster () {
+            def buildSelector = openshift.startBuild("${APP_NAME}")
+            buildSelector.logs('-f')
+          }
         }
+      }
+    }
 
-        stage('Bake'){
-            steps{
-                script{
-                    openshift.withCluster () {
-                        def buildSelector = openshift.startBuild("${APP_NAME}")
-                        buildSelector.logs('-f')
-                    }
-                }
-            }
-        }
-
-        stage('Sync changes to Dev'){
-           agent { label 'jenkins-slave-argocd' }
-           steps {
-             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'honda-labs-ci-cd-argo-auth', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
-                 sh 'argocd login https://argocd-argo-cd.apps.s43.core.rht-labs.com:443 --grpc-web --config /tmp/.argo --username $USERNAME --password $PASSWORD'
-                 sh 'argocd app sync ${APP_NAME}-dev --config /tmp/.argo'
-             }
-
-           }
-         }
-
-         stage('Deploy to Dev'){
-           steps {
-             tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV)
-           }
+    stage('Deploy to Dev'){
+        agent { label 'jenkins-slave-helm' }
+        steps {
+          openshift.withCluster () {
+            openshift.tag( "${APP_NAME}:latest", "${APP_NAME}:${VERSION_TAG}" )
+          }
+          sh "helm upgrade -f charts/open-practice-library/dev-values.yaml --set builds.created_image_tag=${VERSION_TAG} opl-cms ."
+          }
         }
     }
 }

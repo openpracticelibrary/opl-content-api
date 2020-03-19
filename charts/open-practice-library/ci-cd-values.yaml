@@ -1,14 +1,13 @@
-app_name: "open-practice-library-cms"
+app_name: "opl-cms"
 namespace: "argo-cd"
 dev_namespace: "opl-dev"
 
 imagestreams:
-  - name: open-practice-library-cms
+  - name: opl-cms
 
-builds:
+build:
   - name: "open-practice-library-cms"
-    secret_name: "github-auth"
-    trigger_type: "GitHub"
+    trigger_type: "GitLab"
     source_repo: "https://gitlab.com/rht-opl/opl-cms.git"
     source_repo_ref: "master"
     builder_image_name: "nodejs"

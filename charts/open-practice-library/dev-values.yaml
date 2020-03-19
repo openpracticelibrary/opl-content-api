@@ -1,20 +1,19 @@
-app_name: "open-practice-library-cms"
+app_name: "opl-cms"
 namespace: "opl-dev"
 
 builds:
-  - name: "open-practice-library-cms"
-    trigger_type: "GitHub"
-    source_repo: "https://gitlab.com/rht-opl/opl-cms.git"
-    source_repo_ref: "master"
-    builder_image_name: "nodejs"
-    builder_image_tag: "10"
+  created_image_tag: "0.0.1"
+  trigger_type: "GitLab"
+  source_repo: "https://gitlab.com/rht-opl/opl-cms.git"
+  source_repo_ref: "master"
+  builder_image_name: "nodejs"
+  builder_image_tag: "10"
 
 imagestreams:
-  - name: open-practice-library-cms
+  enabled: true
 
 services:
-  - name: open-practice-library-cms
-    ports:
+  - ports:
       - name: http
         protocol: TCP
         port: 1337
@@ -22,19 +21,15 @@ services:
     type: ClusterIP
 
 route:
-  - name: open-practice-library-cms
-    namespace: opl-dev
-    port:
+  - port:
       targetPort: 1337
     to:
       kind: Service
-      name: open-practice-library-cms
+      name: opl-cms
       weight: 100
 
 deploymentconfigs:
-  - namespace: opl-dev
-    name: open-practice-library-cms
-    replicas: 1
+  - replicas: 1
     env_vars:
       - name: "NODE_ENV"
         value: "production"
@@ -44,4 +39,3 @@ deploymentconfigs:
         - containerPort: 1337
           name: http
           protocol: TCP
-    image_version: "latest"

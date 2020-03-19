@@ -1,29 +1,32 @@
 {{- if .Values.deploymentconfigs }}
+{{ $imagetag := .Values.builds.created_image_tag }}
+{{ $appname := .Values.app_name }}
 {{- range $dc := .Values.deploymentconfigs }}
 ---
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: {{ $dc.name }}
+  name: {{ $appname}}
   namespace: {{ $dc.namespace | default $.Values.namespace | quote }}
 spec:
   replicas: {{ $dc.replicas | default "1" }}
   selector:
-    deploymentConfig: "{{ $dc.name }}"
+    matchLabels:
+      app: "{{ $appname }}"
   strategy:
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        deploymentConfig: "{{ $dc.name }}"
-      name: "{{ $dc.name }}"
+        app: "{{ $appname }}"
+      name: "{{ $appname }}"
     spec:
       containers:
       - env:
 {{ toYaml $dc.env_vars | indent 8 }}
-        image: "{{ $dc.image_name | default $dc.name }}:{{ $dc.image_version }}"
+        image: "{{ $dc.image_name | default $appname }}:{{ $imagetag }}"
         imagePullPolicy: Always
-        name: "{{ $dc.name }}"
+        name: "{{ $appname }}"
         ports:
 {{- range $ports := $dc.ports }}
           - name: {{ $ports.name }}
@@ -39,15 +42,5 @@ spec:
 {{ toYaml $dc.volumes | indent 6 }}
 {{- end }}
       terminationGracePeriodSeconds: 60
-  triggers:
-  - imageChangeParams:
-      automatic: true
-      containerNames:
-      - "{{ $dc.name }}"
-      from:
-        kind: ImageStreamTag
-        name: "{{ $dc.image_name | default $.Values.app_name }}:{{ $dc.image_version }}"
-    type: ImageChange
-  - type: ConfigChange
 {{- end }}
 {{- end }}

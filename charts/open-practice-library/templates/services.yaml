@@ -1,11 +1,12 @@
 {{- if .Values.services }}
+{{ $appname := .Values.app_name }}
 {{- range $svc := .Values.services }}
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ $svc.name }}
-  namespace: {{ $svc.namespace | default $.Values.namespace | quote }}
+  name: {{ $appname }}
+  namespace: {{ $.Values.namespace | quote }}
 spec:
   ports:
 {{- range $port := $svc.ports }}
@@ -16,7 +17,7 @@ spec:
     nodePort: 0
 {{- end }}
   selector:
-    deploymentConfig: {{ $svc.name }}
+    deploymentConfig: {{ $appname }}
   type: {{ $svc.type }}
   sessionAffinity: None
 status:

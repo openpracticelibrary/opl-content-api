@@ -1,16 +1,19 @@
 {{- if .Values.builds }}
-{{- range .Values.builds }}
+{{- with .Values.builds }}
 ---
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: "{{ .name}}"
+  name: "{{ $.Values.app_name }}-pipeline"
   namespace: {{ .namespace | default $.Values.namespace | quote }}
 spec:
   nodeSelector: {}
   runPolicy: {{ .run_policy | default "Serial" | quote }}
   triggers:
-    - type: "ImageChange"
+    - type: "GitLab"
+      gitlab:
+        secretReference: "gitlab-webhook"
+    - type: "ConfigChange"
   source:
     contextDir: {{ .source_context_dir | default "" | quote }}
     git:
@@ -18,16 +21,9 @@ spec:
       ref: {{ .source_repo_ref | default "master" | quote }}
     type: Git
   strategy:
-    type: Source
-    sourceStrategy:
-      from:
-        kind: "ImageStreamTag"
-        name: "{{ .builder_image_name }}:{{ .builder_image_tag }}"
-        namespace: {{ .builder_image_namespace | default "openshift" | quote }}
-  output:
-    to:
-      kind: "ImageStreamTag"
-      name: "{{ .name }}:latest"
+    type: "JenkinsPipeline"
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: "Jenkinsfile"
 status:
   lastVersion: 0
 {{- end }}
