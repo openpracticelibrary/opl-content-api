@@ -27,7 +27,7 @@ spec:
   output:
     to:
       kind: "ImageStreamTag"
-      name: "{{ .name }}:latest"
+      name: "{{ $.Values.app_name }}:latest"
 status:
   lastVersion: 0
 {{- end }}
