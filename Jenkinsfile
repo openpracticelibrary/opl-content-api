@@ -63,7 +63,7 @@ pipeline {
     stage('Deploy to Dev'){
       agent { label 'jenkins-slave-helm' }
       steps{
-        sh "cd charts/open-practice-library && helm upgrade -f dev-values.yaml --set deployment.created_image_tag=\\\"${version}\\\" opl-cms ."
+        sh "cd charts/open-practice-library && helm upgrade -f dev-values.yaml --set builds.created_image_tag=\\\"${version}\\\" opl-cms ."
       }
     }
   }
