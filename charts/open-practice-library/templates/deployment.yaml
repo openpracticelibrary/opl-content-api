@@ -1,13 +1,18 @@
 {{- if .Values.deployment }}
 {{ $imagetag := .Values.builds.created_image_tag }}
 {{ $appname := .Values.app_name }}
-{{- range $dc := .Values.deployment }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $appname}}
-  namespace: {{ $dc.namespace | default $.Values.namespace | quote }}
+  namespace: {{ .Values.deployment.namespace | default .Values.namespace | quote }}
+  labels:
+    app: {{ $appname }}
+    chart: {{ template "opl-cms.chart" . }}
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+{{- with $dc := .Values.deployment }}
 spec:
   replicas: {{ $dc.replicas | default "1" }}
   selector:

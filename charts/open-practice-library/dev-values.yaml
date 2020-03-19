@@ -26,21 +26,22 @@ services:
     type: ClusterIP
 
 route:
-  - port:
-      targetPort: 1337
-    to:
-      kind: Service
-      name: opl-cms
-      weight: 100
+  port:
+    targetPort: 1337
+  to:
+    kind: Service
+    name: opl-cms
+    weight: 100
 
 deployment:
-  - replicas: 1
-    env_vars:
-      - name: "NODE_ENV"
-        value: "production"
-      - name: "DATABASE_HOST"
-        value: "opl-mongodb"
-    ports:
-        - containerPort: 1337
-          name: http
-          protocol: TCP
+  replicas: 1
+  image_name: image-registry.openshift-image-registry.svc:5000/opl-dev/opl-cms
+  env_vars:
+    - name: "NODE_ENV"
+      value: "production"
+    - name: "DATABASE_HOST"
+      value: "opl-mongodb"
+  ports:
+    - containerPort: 1337
+      name: http
+      protocol: TCP

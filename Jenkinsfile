@@ -36,9 +36,9 @@ pipeline {
           sh "npm install"
           }
     }
-    stage('Build'){
+    stage('QA'){
         steps{
-          sh "npm run build"
+          sh "echo THIS IS WHERE INTEGRATION TESTING SHOULD HAPPEN"
         }
     }
 
