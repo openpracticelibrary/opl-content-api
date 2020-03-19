@@ -29,16 +29,18 @@ pipeline {
    }
    stages {
     stage('Install') {
-        steps{
-          sh "echo TODO: Implement unit tests, install here..."
+      steps{
+        sh "echo TODO: Implement unit tests, install here..."
+        script {
           version=sh(script: 'npm run version --silent', returnStdout: true).trim()
-          }
+        }
+      }
     }
     stage('Test'){
-        steps{
-          sh "echo ${version}"
-          sh "echo THIS IS WHERE TESTING SHOULD HAPPEN"
-        }
+      steps{
+        sh "echo ${version}"
+        sh "echo THIS IS WHERE TESTING SHOULD HAPPEN"
+      }
     }
 
     stage('Bake'){
