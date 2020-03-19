@@ -5,7 +5,7 @@ kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
   name: "{{ $.Values.app_name}}"
-  namespace: "{{ $.Values.namespace }}"
+  namespace: {{ .namespace | default $.Values.cicd_namespace | quote }}
 spec:
   nodeSelector: {}
   runPolicy: {{ .run_policy | default "Serial" | quote }}
