@@ -8,9 +8,12 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "version": "echo $npm_package_version"
+    "version": "echo $npm_package_version",
+    "postinstall": "patch-package strapi-plugin-graphql"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "patch-package": "^6.2.2"
+  },
   "dependencies": {
     "strapi": "3.0.0-beta.19.3",
     "strapi-admin": "3.0.0-beta.19.3",
