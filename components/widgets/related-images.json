@@ -2,7 +2,7 @@
   "connection": "default",
   "collectionName": "components_widgets_related_images",
   "info": {
-    "name": "relatedImages",
+    "name": "MediaGallery",
     "icon": "camera"
   },
   "options": {},
@@ -10,11 +10,8 @@
     "name": {
       "type": "string"
     },
-    "image": {
-      "collection": "file",
-      "via": "related",
-      "plugin": "upload",
-      "required": false
+    "link": {
+      "type": "string"
     }
   }
 }

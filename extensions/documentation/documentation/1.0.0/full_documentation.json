@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/17/2020 8:48:15 PM"
+    "x-generation-date": "05/11/2020 2:15:25 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3863,7 +3863,7 @@
               }
             }
           },
-          "relatedImages": {
+          "MediaGallery": {
             "type": "array",
             "items": {
               "type": "object",
@@ -3877,54 +3877,8 @@
                 "name": {
                   "type": "string"
                 },
-                "image": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "id",
-                      "name",
-                      "hash",
-                      "mime",
-                      "size",
-                      "url",
-                      "provider"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "hash": {
-                        "type": "string"
-                      },
-                      "sha256": {
-                        "type": "string"
-                      },
-                      "ext": {
-                        "type": "string"
-                      },
-                      "mime": {
-                        "type": "string"
-                      },
-                      "size": {
-                        "type": "number"
-                      },
-                      "url": {
-                        "type": "string"
-                      },
-                      "provider": {
-                        "type": "string"
-                      },
-                      "provider_metadata": {
-                        "type": "object"
-                      },
-                      "related": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                "link": {
+                  "type": "string"
                 }
               }
             }
@@ -4016,9 +3970,6 @@
               "role": {
                 "type": "string"
               },
-              "avatar": {
-                "type": "string"
-              },
               "mediaLink": {
                 "type": "string"
               },
@@ -4039,6 +3990,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "Avatar": {
+                "type": "string"
               }
             }
           },
@@ -4078,9 +4032,6 @@
                 "role": {
                   "type": "string"
                 },
-                "avatar": {
-                  "type": "string"
-                },
                 "mediaLink": {
                   "type": "string"
                 },
@@ -4101,6 +4052,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "Avatar": {
+                  "type": "string"
                 }
               }
             }
@@ -4182,7 +4136,7 @@
               }
             }
           },
-          "relatedImages": {
+          "MediaGallery": {
             "type": "array",
             "items": {
               "type": "object",
@@ -4196,54 +4150,8 @@
                 "name": {
                   "type": "string"
                 },
-                "image": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "id",
-                      "name",
-                      "hash",
-                      "mime",
-                      "size",
-                      "url",
-                      "provider"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "hash": {
-                        "type": "string"
-                      },
-                      "sha256": {
-                        "type": "string"
-                      },
-                      "ext": {
-                        "type": "string"
-                      },
-                      "mime": {
-                        "type": "string"
-                      },
-                      "size": {
-                        "type": "number"
-                      },
-                      "url": {
-                        "type": "string"
-                      },
-                      "provider": {
-                        "type": "string"
-                      },
-                      "provider_metadata": {
-                        "type": "object"
-                      },
-                      "related": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                "link": {
+                  "type": "string"
                 }
               }
             }
@@ -4325,7 +4233,7 @@
               "RelatedContent": {
                 "type": "component"
               },
-              "relatedImages": {
+              "MediaGallery": {
                 "type": "component"
               },
               "subtitle": {
@@ -4419,7 +4327,7 @@
                 "RelatedContent": {
                   "type": "component"
                 },
-                "relatedImages": {
+                "MediaGallery": {
                   "type": "component"
                 },
                 "subtitle": {
@@ -4557,9 +4465,6 @@
                 "role": {
                   "type": "string"
                 },
-                "avatar": {
-                  "type": "string"
-                },
                 "mediaLink": {
                   "type": "string"
                 },
@@ -4580,6 +4485,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "Avatar": {
+                  "type": "string"
                 }
               }
             }
@@ -4676,52 +4584,6 @@
               }
             }
           },
-          "avatar": {
-            "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "sha256": {
-                "type": "string"
-              },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "number"
-              },
-              "url": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "provider_metadata": {
-                "type": "object"
-              },
-              "related": {
-                "type": "string"
-              }
-            }
-          },
           "mediaLink": {
             "type": "string"
           },
@@ -4764,7 +4626,7 @@
                 "RelatedContent": {
                   "type": "component"
                 },
-                "relatedImages": {
+                "MediaGallery": {
                   "type": "component"
                 },
                 "subtitle": {
@@ -4830,7 +4692,7 @@
                 "RelatedContent": {
                   "type": "component"
                 },
-                "relatedImages": {
+                "MediaGallery": {
                   "type": "component"
                 },
                 "subtitle": {
@@ -4862,6 +4724,9 @@
                 }
               }
             }
+          },
+          "Avatar": {
+            "type": "string"
           }
         }
       },
@@ -4920,6 +4785,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "Avatar": {
+            "type": "string"
           }
         }
       },

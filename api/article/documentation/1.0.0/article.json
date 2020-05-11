@@ -642,7 +642,7 @@
               }
             }
           },
-          "relatedImages": {
+          "MediaGallery": {
             "type": "array",
             "items": {
               "type": "object",
@@ -656,54 +656,8 @@
                 "name": {
                   "type": "string"
                 },
-                "image": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "id",
-                      "name",
-                      "hash",
-                      "mime",
-                      "size",
-                      "url",
-                      "provider"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "hash": {
-                        "type": "string"
-                      },
-                      "sha256": {
-                        "type": "string"
-                      },
-                      "ext": {
-                        "type": "string"
-                      },
-                      "mime": {
-                        "type": "string"
-                      },
-                      "size": {
-                        "type": "number"
-                      },
-                      "url": {
-                        "type": "string"
-                      },
-                      "provider": {
-                        "type": "string"
-                      },
-                      "provider_metadata": {
-                        "type": "object"
-                      },
-                      "related": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                "link": {
+                  "type": "string"
                 }
               }
             }
@@ -795,9 +749,6 @@
               "role": {
                 "type": "string"
               },
-              "avatar": {
-                "type": "string"
-              },
               "mediaLink": {
                 "type": "string"
               },
@@ -818,6 +769,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "Avatar": {
+                "type": "string"
               }
             }
           },
@@ -857,9 +811,6 @@
                 "role": {
                   "type": "string"
                 },
-                "avatar": {
-                  "type": "string"
-                },
                 "mediaLink": {
                   "type": "string"
                 },
@@ -880,6 +831,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "Avatar": {
+                  "type": "string"
                 }
               }
             }
@@ -961,7 +915,7 @@
               }
             }
           },
-          "relatedImages": {
+          "MediaGallery": {
             "type": "array",
             "items": {
               "type": "object",
@@ -975,54 +929,8 @@
                 "name": {
                   "type": "string"
                 },
-                "image": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "id",
-                      "name",
-                      "hash",
-                      "mime",
-                      "size",
-                      "url",
-                      "provider"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "hash": {
-                        "type": "string"
-                      },
-                      "sha256": {
-                        "type": "string"
-                      },
-                      "ext": {
-                        "type": "string"
-                      },
-                      "mime": {
-                        "type": "string"
-                      },
-                      "size": {
-                        "type": "number"
-                      },
-                      "url": {
-                        "type": "string"
-                      },
-                      "provider": {
-                        "type": "string"
-                      },
-                      "provider_metadata": {
-                        "type": "object"
-                      },
-                      "related": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                "link": {
+                  "type": "string"
                 }
               }
             }

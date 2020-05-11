@@ -1245,52 +1245,6 @@
               }
             }
           },
-          "avatar": {
-            "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "sha256": {
-                "type": "string"
-              },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "number"
-              },
-              "url": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "provider_metadata": {
-                "type": "object"
-              },
-              "related": {
-                "type": "string"
-              }
-            }
-          },
           "mediaLink": {
             "type": "string"
           },
@@ -1333,7 +1287,7 @@
                 "RelatedContent": {
                   "type": "component"
                 },
-                "relatedImages": {
+                "MediaGallery": {
                   "type": "component"
                 },
                 "subtitle": {
@@ -1399,7 +1353,7 @@
                 "RelatedContent": {
                   "type": "component"
                 },
-                "relatedImages": {
+                "MediaGallery": {
                   "type": "component"
                 },
                 "subtitle": {
@@ -1431,6 +1385,9 @@
                 }
               }
             }
+          },
+          "Avatar": {
+            "type": "string"
           }
         }
       },
@@ -1489,6 +1446,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "Avatar": {
+            "type": "string"
           }
         }
       }

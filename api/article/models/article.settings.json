@@ -39,7 +39,7 @@
       "repeatable": true,
       "component": "widgets.related-content"
     },
-    "relatedImages": {
+    "MediaGallery": {
       "type": "component",
       "repeatable": true,
       "component": "widgets.related-images"

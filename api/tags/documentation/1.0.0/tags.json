@@ -558,7 +558,7 @@
                 "RelatedContent": {
                   "type": "component"
                 },
-                "relatedImages": {
+                "MediaGallery": {
                   "type": "component"
                 },
                 "subtitle": {

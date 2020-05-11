@@ -609,9 +609,6 @@
                 "role": {
                   "type": "string"
                 },
-                "avatar": {
-                  "type": "string"
-                },
                 "mediaLink": {
                   "type": "string"
                 },
@@ -632,6 +629,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "Avatar": {
+                  "type": "string"
                 }
               }
             }
