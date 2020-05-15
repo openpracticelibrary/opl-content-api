@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "components_practice_body_resources",
+  "info": {
+    "name": "resources",
+    "icon": "at"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string"
+    },
+    "linkType": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

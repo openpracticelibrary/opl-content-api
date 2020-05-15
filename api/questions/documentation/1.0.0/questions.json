@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/comments": {
+    "/questions": {
       "get": {
         "deprecated": false,
-        "description": "Find all the comments's records",
+        "description": "Find all the questions's records",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "Retrieve questions document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Comments"
+                    "$ref": "#/components/schemas/Questions"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Questions"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new comments record",
+        "description": "Create a new questions record",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "Retrieve questions document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Comments"
+                  "$ref": "#/components/schemas/Questions"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Questions"
         ],
         "requestBody": {
           "description": "",
@@ -247,20 +247,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewComments"
+                "$ref": "#/components/schemas/NewQuestions"
               }
             }
           }
         }
       }
     },
-    "/comments/count": {
+    "/questions/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of comments documents",
+        "description": "Retrieve the numver of questions documents",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "Retrieve questions document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,22 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Questions"
         ],
         "parameters": []
       }
     },
-    "/comments/{id}": {
+    "/questions/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one comments record",
+        "description": "Find one questions record",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "Retrieve questions document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Comments"
+                  "$ref": "#/components/schemas/Questions"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Questions"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single comments record",
+        "description": "Update a single questions record",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "Retrieve questions document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Comments"
+                  "$ref": "#/components/schemas/Questions"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Questions"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewComments"
+                "$ref": "#/components/schemas/NewQuestions"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single comments record",
+        "description": "Delete a single questions record",
         "responses": {
           "200": {
-            "description": "deletes a single comments based on the ID supplied",
+            "description": "deletes a single questions based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Questions"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Comments": {
+      "Questions": {
         "required": [
           "id"
         ],
@@ -522,95 +522,30 @@
           "id": {
             "type": "string"
           },
-          "username": {
+          "question": {
             "type": "string"
           },
-          "commentDateTime": {
-            "type": "datetime"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "article": {
+          "answers": {
             "required": [
-              "id",
-              "title",
-              "body"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "title": {
-                "type": "string"
-              },
-              "body": {
-                "type": "string"
-              },
-              "image": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "Links": {
-                "type": "component"
-              },
-              "requirements": {
-                "type": "component"
-              },
-              "RelatedContent": {
-                "type": "component"
-              },
-              "MediaGallery": {
-                "type": "component"
-              },
-              "subtitle": {
-                "type": "string"
-              },
-              "upvotes": {
-                "type": "integer"
-              },
-              "tags": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "comments": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "author": {
-                "type": "string"
-              },
-              "coauthors": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "slug": {
+              "answer": {
                 "type": "string"
               }
             }
           }
         }
       },
-      "NewComments": {
+      "NewQuestions": {
         "properties": {
-          "username": {
+          "question": {
             "type": "string"
           },
-          "commentDateTime": {
-            "type": "datetime"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "article": {
+          "answers": {
             "type": "string"
           }
         }
@@ -619,7 +554,7 @@
   },
   "tags": [
     {
-      "name": "Comments"
+      "name": "Questions"
     }
   ]
 }

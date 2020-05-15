@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/comments": {
+    "/practices": {
       "get": {
         "deprecated": false,
-        "description": "Find all the comments's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Comments"
+                    "$ref": "#/components/schemas/Practice"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Practice"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new comments record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Comments"
+                  "$ref": "#/components/schemas/Practice"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Practice"
         ],
         "requestBody": {
           "description": "",
@@ -247,20 +247,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewComments"
+                "$ref": "#/components/schemas/NewPractice"
               }
             }
           }
         }
       }
     },
-    "/comments/count": {
+    "/practices/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of comments documents",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,22 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Practice"
         ],
         "parameters": []
       }
     },
-    "/comments/{id}": {
+    "/practices/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one comments record",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Comments"
+                  "$ref": "#/components/schemas/Practice"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Practice"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single comments record",
+        "description": "Update a record",
         "responses": {
           "200": {
-            "description": "Retrieve comments document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Comments"
+                  "$ref": "#/components/schemas/Practice"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Practice"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewComments"
+                "$ref": "#/components/schemas/NewPractice"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single comments record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single comments based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Comments"
+          "Practice"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Comments": {
+      "Practice": {
         "required": [
           "id"
         ],
@@ -522,96 +522,295 @@
           "id": {
             "type": "string"
           },
-          "username": {
+          "title": {
             "type": "string"
           },
-          "commentDateTime": {
-            "type": "datetime"
-          },
-          "comment": {
+          "subtitle": {
             "type": "string"
           },
-          "article": {
+          "body": {
+            "type": "object",
             "required": [
-              "id",
-              "title",
-              "body"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "title": {
+              "whatIs": {
                 "type": "string"
               },
-              "body": {
+              "whyDo": {
                 "type": "string"
               },
-              "image": {
-                "type": "array",
-                "items": {
+              "howTo": {
+                "type": "string"
+              },
+              "fullText": {
+                "type": "string"
+              }
+            }
+          },
+          "coverImage": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "linkType": {
+                  "type": "string"
+                },
+                "description": {
                   "type": "string"
                 }
-              },
-              "Links": {
-                "type": "component"
-              },
-              "requirements": {
-                "type": "component"
-              },
-              "RelatedContent": {
-                "type": "component"
-              },
-              "MediaGallery": {
-                "type": "component"
-              },
-              "subtitle": {
+              }
+            }
+          },
+          "upvotes": {
+            "type": "integer",
+            "default": 0
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                },
+                "articles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "practices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "username",
+                "email"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "mediaLink": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "articles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "coArticles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "Avatar": {
+                  "type": "string"
+                },
+                "practices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "ama": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
                 "type": "string"
               },
-              "upvotes": {
-                "type": "integer"
-              },
-              "tags": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "comments": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "author": {
+              "question": {
                 "type": "string"
               },
-              "coauthors": {
-                "type": "array",
-                "items": {
+              "answers": {
+                "type": "string"
+              }
+            }
+          },
+          "slug": {
+            "type": "string"
+          },
+          "mediaGallery": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "link": {
                   "type": "string"
                 }
-              },
-              "slug": {
-                "type": "string"
               }
             }
           }
         }
       },
-      "NewComments": {
+      "NewPractice": {
         "properties": {
-          "username": {
+          "title": {
             "type": "string"
           },
-          "commentDateTime": {
-            "type": "datetime"
-          },
-          "comment": {
+          "subtitle": {
             "type": "string"
           },
-          "article": {
+          "body": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "whatIs": {
+                "type": "string"
+              },
+              "whyDo": {
+                "type": "string"
+              },
+              "howTo": {
+                "type": "string"
+              },
+              "fullText": {
+                "type": "string"
+              }
+            }
+          },
+          "coverImage": {
             "type": "string"
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "linkType": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "upvotes": {
+            "type": "integer",
+            "default": 0
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ama": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "mediaGallery": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -619,7 +818,7 @@
   },
   "tags": [
     {
-      "name": "Comments"
+      "name": "Practice"
     }
   ]
 }

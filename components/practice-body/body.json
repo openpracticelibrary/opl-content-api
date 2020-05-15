@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "components_practice_body_bodies",
+  "info": {
+    "name": "Body",
+    "icon": "align-left"
+  },
+  "options": {},
+  "attributes": {
+    "whatIs": {
+      "type": "richtext"
+    },
+    "whyDo": {
+      "type": "richtext"
+    },
+    "howTo": {
+      "type": "richtext"
+    },
+    "fullText": {
+      "type": "richtext"
+    }
+  }
+}

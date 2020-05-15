@@ -73,6 +73,10 @@
     },
     "Avatar": {
       "type": "string"
+    },
+    "practices": {
+      "via": "authors",
+      "collection": "practice"
     }
   }
 }

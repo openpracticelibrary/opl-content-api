@@ -686,6 +686,12 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "practices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -772,6 +778,12 @@
               },
               "Avatar": {
                 "type": "string"
+              },
+              "practices": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -834,9 +846,18 @@
                 },
                 "Avatar": {
                   "type": "string"
+                },
+                "practices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
+          },
+          "slug": {
+            "type": "string"
           }
         }
       },
@@ -961,6 +982,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "slug": {
+            "type": "string"
           }
         }
       }

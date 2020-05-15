@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "practices",
+  "info": {
+    "name": "Practice"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "body": {
+      "type": "component",
+      "repeatable": false,
+      "component": "practice-body.body"
+    },
+    "coverImage": {
+      "type": "string"
+    },
+    "resources": {
+      "type": "component",
+      "repeatable": true,
+      "component": "practice-body.resources"
+    },
+    "upvotes": {
+      "type": "integer",
+      "default": 0
+    },
+    "tags": {
+      "collection": "tags",
+      "via": "practices",
+      "dominant": true
+    },
+    "authors": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "practices",
+      "dominant": true
+    },
+    "ama": {
+      "collection": "questions"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "mediaGallery": {
+      "type": "component",
+      "repeatable": true,
+      "component": "practice-body.media-gallery"
+    }
+  }
+}

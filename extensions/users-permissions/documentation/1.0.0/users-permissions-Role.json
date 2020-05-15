@@ -632,6 +632,12 @@
                 },
                 "Avatar": {
                   "type": "string"
+                },
+                "practices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }

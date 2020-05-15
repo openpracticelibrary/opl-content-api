@@ -587,6 +587,61 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "slug": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "practices": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "subtitle": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "component"
+                },
+                "coverImage": {
+                  "type": "string"
+                },
+                "resources": {
+                  "type": "component"
+                },
+                "upvotes": {
+                  "type": "integer"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "authors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "ama": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "mediaGallery": {
+                  "type": "component"
                 }
               }
             }
@@ -599,6 +654,12 @@
             "type": "string"
           },
           "articles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "practices": {
             "type": "array",
             "items": {
               "type": "string"
