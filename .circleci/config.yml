@@ -14,7 +14,9 @@ jobs:
             - run: npm install
             # Start: Required while Strapi fix is in PR
             - run: npm run patch
-            - run: jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
+            - run:
+                command: |
+                  jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
             - run: npm install
             # End: Required while Strapi fix is in PR
             - run: npm ci
