@@ -1,21 +1,21 @@
-# services:
-  # - mongodb
-  # - docker
+services:
+  - mongodb
+  - docker
 
-# language: node
+language: node
 
-# jobs:
-  # include:
-    # - stage: "Tests"
-      # name: "Unit Tests"
-      # script: echo "UNIT TEST ME"
-    # - name: "Integration Tests"
-      # script: npm run ci
-    # - stage: "Build"
-      # script:
-        # - docker build -t openpracticelibrary/opl-content-api .
-    # - stage: "Push image to Quay"
-      # script:
-        # - bash _travis/pushToQuay.sh
-      # on:
-        # branch: master
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests"
+      script: echo "UNIT TEST ME"
+    - name: "Integration Tests"
+      script: npm run ci
+    - stage: "Build"
+      script:
+        - docker build -t openpracticelibrary/opl-content-api .
+    - stage: "Push image to Quay"
+      script:
+        - bash _travis/pushToQuay.sh
+      on:
+        branch: master
