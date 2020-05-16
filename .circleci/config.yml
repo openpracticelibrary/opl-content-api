@@ -9,17 +9,19 @@ jobs:
     steps:
       - jq/install
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            # Start: Required while Strapi fix is in PR
-            - run: npm run patch
-            - run:
-                command: |
-                  jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
-            - run: npm install
-            # End: Required while Strapi fix is in PR
-            - run: npm ci
+      - run: npm install
+      # Start: Required while Strapi fix is in PR
+      - run: npm run patch
+      - run:
+          command: |
+            jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
+      - run: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      # End: Required while Strapi fix is in PR
+      - run: npm ci
 workflows:
     build-and-test:
       jobs:
