@@ -4,9 +4,6 @@ services:
 
 language: node
 
-before_script:
-  - sleep 15
-
 jobs:
   include:
     - stage: "Tests"
@@ -18,6 +15,7 @@ jobs:
       script:
         - docker build -t openpracticelibrary/opl-content-api .
     - stage: "Push image to Quay"
-      script: bash _travis/pushToQuay.sh
+      script:
+        - bash _travis/pushToQuay.sh
       on:
         branch: master
