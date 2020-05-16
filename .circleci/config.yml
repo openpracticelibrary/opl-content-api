@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   jq: circleci/jq@2.0.2
 jobs:
-  build-and-test:
+  build:
     docker:
       - image: circleci/node:lts
       - image: circleci/mongo:latest
@@ -10,19 +10,35 @@ jobs:
       - jq/install
       - checkout
       - run: npm install
-      # Start: Required while Strapi fix is in PR
-      - run: npm run patch
       - run:
+          name: Fix Strapi GraphQL plugin
+          command: npm run patch
+      - run:
+          name: Fix Strapi GraphQL plugin dependency (patch)
           command: |
             jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
-      - run: npm install
+      - run:
+          name: Install Strapi GraphQL plugin dependency (patch)
+          command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       # End: Required while Strapi fix is in PR
-      - run: npm run circleci
+  test:
+    docker:
+      - image: circleci/node:lts
+      - image: circleci/mongo:latest
+    steps:
+      - checkout
+      - name: Integration Tests
+        run: npm run circleci
+      - store_test_results:
+          path: test-results
 workflows:
     build-and-test:
       jobs:
-        - build-and-test
+        - build
+        - test:
+           requires:
+             - build
