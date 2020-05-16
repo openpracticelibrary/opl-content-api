@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "answers",
+  "info": {
+    "name": "Answers"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "answer": {
+      "type": "text"
+    }
+  }
+}

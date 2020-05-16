@@ -17,6 +17,10 @@
       "via": "tags",
       "columnName": "tags",
       "collection": "article"
+    },
+    "practices": {
+      "via": "tags",
+      "collection": "practice"
     }
   }
 }

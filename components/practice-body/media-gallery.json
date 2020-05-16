@@ -1,0 +1,14 @@
+{
+  "connection": "default",
+  "collectionName": "components_practice_body_media_galleries",
+  "info": {
+    "name": "mediaGallery",
+    "icon": "desktop"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string"
+    }
+  }
+}
