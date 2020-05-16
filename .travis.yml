@@ -1,5 +1,6 @@
 services:
   - mongodb
+  - docker
 
 language: node
 
@@ -13,4 +14,7 @@ jobs:
       script: echo "UNIT TEST ME"
     - name: "Integration Tests"
       script: npm run ci
+    - stage: "Build"
+      script:
+        - docker build -t openpracticelibrary/opl-content-api .
 
