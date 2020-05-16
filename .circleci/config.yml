@@ -31,8 +31,9 @@ jobs:
       - image: circleci/mongo:latest
     steps:
       - checkout
-      - name: Integration Tests
-        run: npm run circleci
+      - run:
+          name: Integration Tests
+          command: npm run circleci
       - store_test_results:
           path: test-results
 workflows:
