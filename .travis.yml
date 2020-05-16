@@ -17,4 +17,7 @@ jobs:
     - stage: "Build"
       script:
         - docker build -t openpracticelibrary/opl-content-api .
-
+    - stage: "Push image to Quay"
+      script: bash _travis/pushToQuay.sh
+      on:
+        branch: master
