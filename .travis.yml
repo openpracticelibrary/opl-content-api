@@ -1,0 +1,16 @@
+services:
+  - mongodb
+
+language: node
+
+before_script:
+  - sleep 15
+
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests"
+      script: echo "UNIT TEST ME"
+    - name: "Integration Tests"
+      script: npm run ci
+

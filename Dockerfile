@@ -3,8 +3,6 @@
 ####################################################
 
 FROM node:lts
-ENV NODE_ENV="production"
-ENV DATABASE_HOST="localhost"
 RUN apt-get update
 RUN apt-get install -y jq
 WORKDIR /app
@@ -19,6 +17,7 @@ RUN npm install
 RUN npm run patch
 # End required for PR review
 
+ENV NODE_ENV="production"
 RUN npm run build
 EXPOSE 1337
 ENTRYPOINT ["npm", "start"]
