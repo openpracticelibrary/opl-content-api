@@ -9,10 +9,15 @@
     "build": "strapi build",
     "strapi": "strapi",
     "version": "echo $npm_package_version",
-    "patch": "patch-package"
+    "patch": "patch-package",
+    "test:integration": "jest '(test/integration)/.*\\.spec\\.js$' --verbose",
+    "ci": "start-server-and-test start http://localhost:1337 test:integration"
   },
   "devDependencies": {
-    "patch-package": "^6.2.2"
+    "jest": "^26.0.1",
+    "patch-package": "^6.2.2",
+    "start-server-and-test": "^1.11.0",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "strapi": "3.0.0-beta.19.3",
