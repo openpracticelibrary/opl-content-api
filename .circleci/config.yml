@@ -38,6 +38,8 @@ jobs:
       - store_artifacts:
           path: ./reports/junit
   dev-quay-push:
+    docker:
+      - image: circleci/node:lts
     steps:
       - checkout
       - restore_cache:
