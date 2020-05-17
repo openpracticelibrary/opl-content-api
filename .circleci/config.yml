@@ -34,7 +34,70 @@ jobs:
           path: ./reports/junit
       - store_artifacts:
           path: ./reports/junit
+    dev-quay-push:
+      steps:
+        - checkout
+        - setup_remote_docker
+            docker_layer_caching: true
+        - run: |
+            docker build -t openpracticelibrary/opl-content-api:latest .
+            echo "$QUAY_PASS" | docker login -u $QUAY_USER --password-stdin quay.io
+            docker push openpracticelibrary/opl-content-api:latest
+    quay-push:
+      steps:
+        - checkout
+        - setup_remote_docker
+            docker_layer_caching: true
+        - run: |
+            docker build -t openpracticelibrary/opl-content-api:$CIRCLE_TAG .
+            echo "$QUAY_PASS" | docker login -u $QUAY_USER --password-stdin quay.io
+            docker push openpracticelibrary/opl-content-api:$CIRCLE_TAG
+
 workflows:
   build-and-test:
     jobs:
       - build-and-test
+  dev-build-and-push:
+    jobs:
+      - build-and-test:
+          filters:
+            branches:
+              only: master
+      - dev-quay-push:
+          require:
+            - build-and-test
+          filters:
+            branches:
+              only: master
+  rc-build-and-push:
+    jobs:
+      - build-and-test:
+          filters:
+            tags:
+              only: /^rc.*/
+            branches:
+              ignore: /.*/
+      - quay-push:
+          require:
+            - build-and-test
+          filters:
+            tags:
+              only: /^rc.*/
+            branches:
+              ignore: /.*/
+  prod-build-and-push:
+    jobs:
+      - build-and-test:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - quay-push:
+          require:
+            - build-and-test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
