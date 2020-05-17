@@ -51,7 +51,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
-          docker build -t openpracticelibrary/opl-content-api:latest .
+          docker build -t openpracticelibrary/opl-content-api:dev-$CIRCLE_BUILD_NUM .
           echo "$QUAY_PASS" | docker login -u $QUAY_USER --password-stdin quay.io
           docker push openpracticelibrary/opl-content-api:latest
   quay-push:
@@ -88,12 +88,12 @@ workflows:
           filters:
             branches:
               only: master
-  rc-build-and-push:
+  build-and-push:
     jobs:
       - build-and-test:
           filters:
             tags:
-              only: /^rc.*/
+              only: /^v.*|rc.*/
             branches:
               ignore: /.*/
       - quay-push:
@@ -101,22 +101,6 @@ workflows:
             - build-and-test
           filters:
             tags:
-              only: /^rc.*/
-            branches:
-              ignore: /.*/
-  prod-build-and-push:
-    jobs:
-      - build-and-test:
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
-      - quay-push:
-          requires:
-            - build-and-test
-          filters:
-            tags:
-              only: /^v.*/
+              only: /^v.*|rc.*/
             branches:
               ignore: /.*/
