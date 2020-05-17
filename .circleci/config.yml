@@ -28,8 +28,12 @@ jobs:
       - run:
           name: Integration Tests
           command: npm run circleci
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
       - store_test_results:
-          path: test-results
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
 workflows:
   build-and-test:
     jobs:

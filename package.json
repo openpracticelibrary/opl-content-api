@@ -10,11 +10,12 @@
     "strapi": "strapi",
     "version": "echo $npm_package_version",
     "patch": "patch-package",
-    "test:integration": "jest '(test/integration)/.*\\.spec\\.js$' --verbose",
+    "test:integration": "jest '(test/integration)/.*\\.spec\\.js$' --runInBand --reporters=default --reporters=jest-junit",
     "circleci": "start-server-and-test start http://localhost:1337 test:integration"
   },
   "devDependencies": {
     "jest": "^26.0.1",
+    "jest-junit": "^10.0.0",
     "patch-package": "^6.2.2",
     "start-server-and-test": "^1.11.0",
     "supertest": "^4.0.2"
