@@ -37,7 +37,7 @@ jobs:
     dev-quay-push:
       steps:
         - checkout
-        - setup_remote_docker
+        - setup_remote_docker:
             docker_layer_caching: true
         - run: |
             docker build -t openpracticelibrary/opl-content-api:latest .
@@ -46,7 +46,7 @@ jobs:
     quay-push:
       steps:
         - checkout
-        - setup_remote_docker
+        - setup_remote_docker:
             docker_layer_caching: true
         - run: |
             docker build -t openpracticelibrary/opl-content-api:$CIRCLE_TAG .
