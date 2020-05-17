@@ -1,4 +1,4 @@
-name: build-and-push-dev-image
+name: Content API Dev Build
 
 on:
   push:

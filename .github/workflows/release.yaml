@@ -1,4 +1,4 @@
-name: Create Release Tagged Image
+name: Content API Release
 
 on:
   release:
