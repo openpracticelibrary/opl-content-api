@@ -20,11 +20,14 @@ jobs:
       - run:
           name: Install Strapi GraphQL plugin dependency (patch)
           command: npm install
+      # End: Required while Strapi fix is in PR
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-      # End: Required while Strapi fix is in PR
+      - persist_to_workspace:
+          root: .
+          paths: node_modules/*
       - run:
           name: Integration Tests
           command: npm run circleci
@@ -37,6 +40,12 @@ jobs:
   dev-quay-push:
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ checksum "package-lock.json" }}
+            - dependency-cache-
+      - attach_workspace:
+          at: node_modules
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
@@ -44,8 +53,16 @@ jobs:
           echo "$QUAY_PASS" | docker login -u $QUAY_USER --password-stdin quay.io
           docker push openpracticelibrary/opl-content-api:latest
   quay-push:
+    docker:
+      - image: circleci/node:lts
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ checksum "package-lock.json" }}
+            - dependency-cache-
+      - attach_workspace:
+          at: node_modules
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
