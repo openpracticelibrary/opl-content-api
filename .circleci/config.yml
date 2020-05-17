@@ -83,7 +83,7 @@ workflows:
             branches:
               only: master
       - dev-quay-push:
-          require:
+          requires:
             - build-and-test
           filters:
             branches:
@@ -97,7 +97,7 @@ workflows:
             branches:
               ignore: /.*/
       - quay-push:
-          require:
+          requires:
             - build-and-test
           filters:
             tags:
@@ -113,7 +113,7 @@ workflows:
             branches:
               ignore: /.*/
       - quay-push:
-          require:
+          requires:
             - build-and-test
           filters:
             tags:
