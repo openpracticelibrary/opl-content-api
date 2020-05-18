@@ -1,7 +1,10 @@
-# Open Practice Library CMS
+# Open Practice Library Content API
+
 ![Pull Requests](https://github.com/openpracticelibrary/opl-content-api/workflows/Pull%20Requests/badge.svg)
 
-A headless CMS for Open Practice Library v2.  This application uses [Strapi](https://strapi.io/documentation/3.0.0-beta.x), an open source headless CMS written in Node.js.  The admin UI can be completely separated or removed entirely based on build process.
+This application uses [Strapi](https://strapi.io/documentation/3.0.0-beta.x), an open source headless CMS written in Node.js.  The admin UI can be completely separated or removed entirely based on build process.
+
+The Content API is intended to be part of a federated Apollo GraphQL service, allowing the extension of its schema in other services.
 
 ## Getting Started
 
