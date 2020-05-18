@@ -49,7 +49,7 @@ jobs:
 
       - name: Kustomize build
         run: |
-          cd openpracticelibrary/content-api/overlays/production
+          cd openpracticelibrary/content-api/overlays/release
           kustomize edit set image quay.io/openpracticelibrary/opl-content-api:${{ github.event.release.tag_name }}
           git add .
           git commit -m "Automated Action: Updated opl-content-api prerelease image tag to `${{ github.event.release.tag_name }}`"
