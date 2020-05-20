@@ -1,0 +1,56 @@
+name: Pull Requests
+
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+        - 27017:27017
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+
+      - name: Fix Strapi GraphQL Plugin
+        run: npm run patch
+
+      - name: Fix Strapi GraphQL Plugin dependency
+        run: |
+          jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
+
+      - name: Install Strapi GraphQL Plugin dependency
+        run: npm install
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: v1-npm-deps-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: v1-npm-deps-
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Run Unit Tests
+        run: echo "Oops! We should get some of those unit test thingys in here soon..."
+
+      - name: Run API tests
+        run: npm run test:api
+

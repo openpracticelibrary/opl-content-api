@@ -9,10 +9,19 @@
     "build": "strapi build",
     "strapi": "strapi",
     "version": "echo $npm_package_version",
-    "patch": "patch-package"
+    "patch": "patch-package && ./tempPatch.sh && npm install",
+    "test:integration": "jest '(test/integration)/.*\\.spec\\.js$' --runInBand --reporters=default --reporters=jest-junit",
+    "test:api": "start-server-and-test start http://localhost:1337 test:integration",
+    "lint": "eslint"
   },
   "devDependencies": {
-    "patch-package": "^6.2.2"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.0.0",
+    "jest": "^26.0.1",
+    "jest-junit": "^10.0.0",
+    "patch-package": "^6.2.2",
+    "start-server-and-test": "^1.11.0",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "strapi": "3.0.0-beta.19.3",
