@@ -58,8 +58,7 @@ jobs:
         run: npm run test:api
   build-image-and-push:
     runs-on: ubuntu-latest
-    env:
-      SHA8: ${GITHUB_SHA::8}
+    needs: build-and-test
 
     steps:
       - name: Git Checkout
@@ -72,11 +71,11 @@ jobs:
           password: ${{ secrets.QUAY_PASS }}
           registry: quay.io
           repository: openpracticelibrary/opl-content-api
-          tags: $SHA8
+          tags: ${{ github.sha }}
   kustomize:
     runs-on: ubuntu-latest
-    env:
-      SHA8: ${GITHUB_SHA::8}
+    needs: build-image-and-push
+
     steps:
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
@@ -92,7 +91,7 @@ jobs:
       - name: Kustomize build
         run: |
           cd openpracticelibrary/content-api/overlays/development
-          kustomize edit set image quay.io/openpracticelibrary/opl-content-api:${SHA8}
+          kustomize edit set image quay.io/openpracticelibrary/opl-content-api:${{ github.sha }}
           git add .
           git commit -m "Automated Action: Updated opl-content-api dev image tag to `${SHA8}`"
           git push origin master
