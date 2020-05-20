@@ -2,6 +2,8 @@
 
 ![Pull Requests](https://github.com/openpracticelibrary/opl-content-api/workflows/Pull%20Requests/badge.svg)
 
+![Dev Build](https://github.com/openpracticelibrary/opl-content-api/workflows/Content%20API%20Dev%20Build/badge.svg)
+
 This application uses [Strapi](https://strapi.io/documentation/3.0.0-beta.x), an open source headless CMS written in Node.js.  The admin UI can be completely separated or removed entirely based on build process.
 
 The Content API is intended to be part of a federated Apollo GraphQL service, allowing the extension of its schema in other services.
