@@ -1,4 +1,4 @@
-name: Dev Build
+name: Content API Dev Build
 
 on:
   push:
