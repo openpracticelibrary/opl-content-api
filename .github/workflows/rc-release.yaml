@@ -49,6 +49,8 @@ jobs:
         run: |
           cd openpracticelibrary/content-api/overlays/prerelease
           kustomize edit set image quay.io/openpracticelibrary/opl-content-api:${{ github.event.release.tag_name }}
+          git config --global user.email "shahein@redhat.com"
+          git config --global user.name "GitHub Actions"
           git add .
           git commit -m "Automated Action: Updated opl-content-api prerelease image tag to `${{ github.event.release.tag_name }}`"
           git push origin master

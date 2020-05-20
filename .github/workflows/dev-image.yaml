@@ -95,7 +95,7 @@ jobs:
           git config --global user.email "shahein@redhat.com"
           git config --global user.name "GitHub Actions"
           git add .
-          git commit -m "Automated Action: Updated opl-content-api dev image tag to `${SHA8}`"
+          git commit -m "Automated Action: Updated opl-content-api dev image tag to `${{ github.sha }}`"
           git push origin master
 
 
