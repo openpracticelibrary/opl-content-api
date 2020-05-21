@@ -71,7 +71,7 @@ jobs:
           password: ${{ secrets.QUAY_PASS }}
           registry: quay.io
           repository: openpracticelibrary/opl-content-api
-          tags: ${{ github.sha }}
+          tags: ${{ github.sha }},latest
   kustomize:
     runs-on: ubuntu-latest
     needs: build-image-and-push
@@ -95,7 +95,7 @@ jobs:
           git config --global user.email "shahein@redhat.com"
           git config --global user.name "GitHub Actions"
           git add .
-          git commit -m "Automated Action: Updated opl-content-api dev image tag to `${{ github.sha }}`"
+          git commit -m "Automated Action: Updated opl-content-api dev image tag"
           git push origin master
 
 

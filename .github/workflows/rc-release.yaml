@@ -52,5 +52,5 @@ jobs:
           git config --global user.email "shahein@redhat.com"
           git config --global user.name "GitHub Actions"
           git add .
-          git commit -m "Automated Action: Updated opl-content-api prerelease image tag to `${{ github.event.release.tag_name }}`"
+          git commit -m "Automated Action: Updated opl-content-api prerelease image tag"
           git push origin master
