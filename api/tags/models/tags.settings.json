@@ -11,16 +11,18 @@
   },
   "attributes": {
     "tag": {
-      "type": "string"
+      "type": "string",
+      "unique": true,
+      "required": true
     },
     "articles": {
-      "via": "tags",
       "columnName": "tags",
-      "collection": "article"
+      "collection": "article",
+      "via": "tags"
     },
     "practices": {
-      "via": "tags",
-      "collection": "practice"
+      "collection": "practice",
+      "via": "tags"
     }
   }
 }
