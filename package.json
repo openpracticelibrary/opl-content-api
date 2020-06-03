@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.0.0",
+    "eslint": "^7.1.0",
     "jest": "^26.0.1",
     "jest-junit": "^10.0.0",
     "patch-package": "^6.2.2",
@@ -24,19 +24,19 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "strapi": "3.0.0-beta.19.3",
-    "strapi-admin": "3.0.0-beta.19.3",
-    "strapi-connector-mongoose": "3.0.0-beta.19.3",
-    "strapi-plugin-content-manager": "3.0.0-beta.19.3",
-    "strapi-plugin-content-type-builder": "3.0.0-beta.19.3",
-    "strapi-plugin-documentation": "^3.0.0-beta.19.3",
-    "strapi-plugin-email": "3.0.0-beta.19.3",
-    "strapi-plugin-graphql": "^3.0.0-beta.19.3",
-    "strapi-plugin-mongodb-files": "^3.0.0-beta.18.5",
-    "strapi-plugin-upload": "3.0.0-beta.19.3",
-    "strapi-plugin-users-permissions": "3.0.0-beta.19.3",
-    "strapi-provider-upload-mongodb": "^3.0.0-beta.18.5",
-    "strapi-utils": "3.0.0-beta.19.3"
+    "strapi": "3.0.1",
+    "strapi-admin": "3.0.1",
+    "strapi-connector-mongoose": "3.0.1",
+    "strapi-plugin-content-manager": "3.0.1",
+    "strapi-plugin-content-type-builder": "3.0.1",
+    "strapi-plugin-documentation": "^3.0.1",
+    "strapi-plugin-email": "3.0.1",
+    "strapi-plugin-graphql": "^3.0.1",
+    "strapi-plugin-mongodb-files": "^3.0.0-beta.20.2",
+    "strapi-plugin-upload": "3.0.1",
+    "strapi-plugin-users-permissions": "3.0.1",
+    "strapi-provider-upload-mongodb": "^3.0.0-beta.20.5",
+    "strapi-utils": "3.0.1"
   },
   "author": {
     "name": "A Strapi developer"
