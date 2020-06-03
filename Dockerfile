@@ -1,4 +1,4 @@
-FROM node:lts
+FROM strapi/base
 RUN apt-get update
 RUN apt-get install -y jq
 WORKDIR /app
