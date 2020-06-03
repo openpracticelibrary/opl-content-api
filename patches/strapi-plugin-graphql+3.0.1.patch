@@ -1,0 +1,63 @@
+diff --git a/node_modules/strapi-plugin-graphql/config/settings.json b/node_modules/strapi-plugin-graphql/config/settings.json
+index 07ddc3f..74050cc 100644
+--- a/node_modules/strapi-plugin-graphql/config/settings.json
++++ b/node_modules/strapi-plugin-graphql/config/settings.json
+@@ -5,5 +5,6 @@
+   "playgroundAlways": false,
+   "depthLimit": 7,
+   "amountLimit": 100,
+-  "shareEnabled": false
++  "shareEnabled": false,
++  "federation": false
+ }
+diff --git a/node_modules/strapi-plugin-graphql/hooks/graphql/index.js b/node_modules/strapi-plugin-graphql/hooks/graphql/index.js
+index 5e9aca3..69b929f 100644
+--- a/node_modules/strapi-plugin-graphql/hooks/graphql/index.js
++++ b/node_modules/strapi-plugin-graphql/hooks/graphql/index.js
+@@ -7,6 +7,7 @@
+ // Public node modules.
+ const _ = require('lodash');
+ const { ApolloServer } = require('apollo-server-koa');
++const { buildFederatedSchema } = require('@apollo/federation');
+ const depthLimit = require('graphql-depth-limit');
+ const loadConfigs = require('./load-config');
+ 
+@@ -84,9 +85,17 @@ module.exports = strapi => {
+         return;
+       }
+ 
++      const isFederated = _.get(strapi.plugins.graphql, 'config.federation', false);
++      const schemaDef = {};
++      if (isFederated) {
++        schemaDef.schema = buildFederatedSchema([{ typeDefs, resolvers }]);
++      } else {
++        schemaDef.typeDefs = typeDefs;
++        schemaDef.resolvers = resolvers;
++      }
++
+       const serverParams = {
+-        typeDefs,
+-        resolvers,
++        ...schemaDef,
+         context: ({ ctx }) => {
+           // Initiliase loaders for this request.
+           // TODO: set loaders in the context not globally
+diff --git a/node_modules/strapi-plugin-graphql/services/schema-generator.js b/node_modules/strapi-plugin-graphql/services/schema-generator.js
+index 5c4b8a3..f181cb3 100644
+--- a/node_modules/strapi-plugin-graphql/services/schema-generator.js
++++ b/node_modules/strapi-plugin-graphql/services/schema-generator.js
+@@ -90,8 +90,12 @@ const generateSchema = () => {
+     writeGenerateSchema(graphql.printSchema(schema));
+   }
+ 
+-  // Remove custom scalar (like Upload);
+-  typeDefs = Types.removeCustomScalar(typeDefs, resolvers);
++  const isFederated = _.get(strapi.plugins.graphql, 'config.federation', false);
++
++  if (!isFederated) {
++    // Remove custom scalar (like Upload);
++    typeDefs = Types.removeCustomScalar(typeDefs, resolvers);
++  }
+ 
+   return {
+     typeDefs: gql(typeDefs),
