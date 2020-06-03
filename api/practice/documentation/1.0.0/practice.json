@@ -585,7 +585,8 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "tag"
               ],
               "properties": {
                 "id": {

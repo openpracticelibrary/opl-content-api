@@ -34,8 +34,8 @@
       "default": 0
     },
     "tags": {
-      "collection": "tags",
       "via": "practices",
+      "collection": "tags",
       "dominant": true
     },
     "authors": {
