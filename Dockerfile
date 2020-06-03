@@ -8,9 +8,9 @@ COPY . .
 
 # Required while upstream changes are still in PR review
 RUN npm run patch
-RUN jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
-RUN npm install
-RUN npm run patch
+# The above runs (patch-package) and the following:
+# RUN jq '.dependencies |= .+ { "@apollo/federation": "^0.15.0" }' node_modules/strapi-plugin-graphql/package.json > tmp.package.json && mv tmp.package.json node_modules/strapi-plugin-graphql/package.json
+# RUN npm install
 # End required for PR review
 
 ENV NODE_ENV="production"
