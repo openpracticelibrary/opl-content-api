@@ -1,7 +1,8 @@
-FROM node:12.16.3-stretch
+FROM node:lts
 RUN apt-get update
 RUN apt-get install -y jq
 WORKDIR /app
+RUN npm install -g npm
 COPY package*.json ./
 RUN npm install
 COPY . .
