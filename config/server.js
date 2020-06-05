@@ -1,16 +1,16 @@
 module.exports = ({ env }) => {
   return {
-    'host': 'localhost',
-    'port': `${env.PORT || 1337}`,
-    'production': true,
-    'proxy': {
-      'enabled': false
+    host: env('HOST', 'localhost'),
+    port: env('PORT', 1337),
+    production: true,
+    proxy: {
+      enabled: false
     },
-    'cron': {
-      'enabled': false
+    cron: {
+      enabled: false
     },
-    'admin': {
-      'autoOpen': false
+    admin: {
+      autoOpen: false
     }
   };
 };
