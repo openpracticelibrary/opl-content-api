@@ -55,6 +55,9 @@
       "type": "component",
       "repeatable": true,
       "component": "practice-body.media-gallery"
+    },
+    "curated": {
+      "type": "integer"
     }
   }
 }

@@ -714,6 +714,9 @@
                 }
               }
             }
+          },
+          "curated": {
+            "type": "integer"
           }
         }
       },
@@ -812,6 +815,9 @@
                 }
               }
             }
+          },
+          "curated": {
+            "type": "integer"
           }
         }
       }

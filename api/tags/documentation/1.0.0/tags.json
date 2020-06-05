@@ -643,6 +643,9 @@
                 },
                 "mediaGallery": {
                   "type": "component"
+                },
+                "curated": {
+                  "type": "integer"
                 }
               }
             }
