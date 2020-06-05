@@ -14,6 +14,6 @@ RUN npm install
 # End required for PR review
 
 ENV NODE_ENV="production"
-RUN npm run build
+RUN npm run build -- --clean
 EXPOSE 1337
 ENTRYPOINT ["npm", "start"]
