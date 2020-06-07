@@ -618,18 +618,6 @@
                 "lastName": {
                   "type": "string"
                 },
-                "articles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "coArticles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "Avatar": {
                   "type": "string"
                 },

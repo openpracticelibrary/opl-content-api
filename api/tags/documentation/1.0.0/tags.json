@@ -526,75 +526,6 @@
           "tag": {
             "type": "string"
           },
-          "articles": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "title",
-                "body"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "body": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "Links": {
-                  "type": "component"
-                },
-                "requirements": {
-                  "type": "component"
-                },
-                "RelatedContent": {
-                  "type": "component"
-                },
-                "MediaGallery": {
-                  "type": "component"
-                },
-                "subtitle": {
-                  "type": "string"
-                },
-                "upvotes": {
-                  "type": "integer"
-                },
-                "tags": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "author": {
-                  "type": "string"
-                },
-                "coauthors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "slug": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "practices": {
             "type": "array",
             "items": {
@@ -659,12 +590,6 @@
         "properties": {
           "tag": {
             "type": "string"
-          },
-          "articles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "practices": {
             "type": "array",
