@@ -595,12 +595,6 @@
                 "tag": {
                   "type": "string"
                 },
-                "articles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "practices": {
                   "type": "array",
                   "items": {
@@ -654,18 +648,6 @@
                 },
                 "lastName": {
                   "type": "string"
-                },
-                "articles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "coArticles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "Avatar": {
                   "type": "string"
