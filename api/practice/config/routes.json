@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/practices/keyword/:keyword",
+      "handler": "practice.findByKeyword",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/practices/count",
       "handler": "practice.count",
       "config": {
