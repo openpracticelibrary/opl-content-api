@@ -1,5 +1,3 @@
-const util = require('util');
-
 module.exports = {
   query: `
     practicesByKeyword(keyword: String): [Practice]!
