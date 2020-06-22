@@ -15,6 +15,15 @@
     },
     "answers": {
       "collection": "answers"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
     }
   }
 }

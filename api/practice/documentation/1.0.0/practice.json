@@ -742,6 +742,15 @@
               },
               "answers": {
                 "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
               }
             }
           },
