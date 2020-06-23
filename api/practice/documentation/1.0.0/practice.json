@@ -742,6 +742,12 @@
               },
               "answers": {
                 "type": "string"
+              },
+              "questionerName": {
+                "type": "string"
+              },
+              "questionerEmail": {
+                "type": "string"
               }
             }
           },

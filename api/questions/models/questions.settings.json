@@ -15,6 +15,13 @@
     },
     "answers": {
       "collection": "answers"
+    },
+    "questionerName": {
+      "type": "string",
+      "default": "Anonymous User"
+    },
+    "questionerEmail": {
+      "type": "email"
     }
   }
 }

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/10/2020 3:49:39 PM"
+    "x-generation-date": "06/23/2020 7:43:34 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4495,6 +4495,12 @@
               },
               "answers": {
                 "type": "string"
+              },
+              "questionerName": {
+                "type": "string"
+              },
+              "questionerEmail": {
+                "type": "string"
               }
             }
           },
@@ -4647,6 +4653,13 @@
                 "type": "string"
               }
             }
+          },
+          "questionerName": {
+            "type": "string",
+            "default": "Anonymous User"
+          },
+          "questionerEmail": {
+            "type": "string"
           }
         }
       },
@@ -4656,6 +4669,13 @@
             "type": "string"
           },
           "answers": {
+            "type": "string"
+          },
+          "questionerName": {
+            "type": "string",
+            "default": "Anonymous User"
+          },
+          "questionerEmail": {
             "type": "string"
           }
         }

@@ -537,6 +537,13 @@
                 "type": "string"
               }
             }
+          },
+          "questionerName": {
+            "type": "string",
+            "default": "Anonymous User"
+          },
+          "questionerEmail": {
+            "type": "string"
           }
         }
       },
@@ -546,6 +553,13 @@
             "type": "string"
           },
           "answers": {
+            "type": "string"
+          },
+          "questionerName": {
+            "type": "string",
+            "default": "Anonymous User"
+          },
+          "questionerEmail": {
             "type": "string"
           }
         }
