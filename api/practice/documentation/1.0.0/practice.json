@@ -743,13 +743,10 @@
               "answers": {
                 "type": "string"
               },
-              "firstName": {
+              "questionerName": {
                 "type": "string"
               },
-              "lastName": {
-                "type": "string"
-              },
-              "email": {
+              "questionerEmail": {
                 "type": "string"
               }
             }

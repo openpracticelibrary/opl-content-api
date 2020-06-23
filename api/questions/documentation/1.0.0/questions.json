@@ -538,13 +538,11 @@
               }
             }
           },
-          "firstName": {
-            "type": "string"
+          "questionerName": {
+            "type": "string",
+            "default": "Anonymous User"
           },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
+          "questionerEmail": {
             "type": "string"
           }
         }
@@ -557,13 +555,11 @@
           "answers": {
             "type": "string"
           },
-          "firstName": {
-            "type": "string"
+          "questionerName": {
+            "type": "string",
+            "default": "Anonymous User"
           },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
+          "questionerEmail": {
             "type": "string"
           }
         }
