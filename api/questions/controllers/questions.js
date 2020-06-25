@@ -6,21 +6,7 @@
  */
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
-const baseUrlMap = {
-  development: 'http://opl-content-api-opl-dev.apps.s44.core.rht-labs.com',
-  staging: 'http://opl-content-api-opl-staging.apps.s44.core.rht-labs.com',
-  production: 'http://opl-content-api-opl-staging.apps.s44.core.rht-labs.com',
-};
-const baseUrl = baseUrlMap[process.env.NODE_ENV];
-
-const amaDestEmailMap = {
-  development: 'openpracticelibraryteam@gmail.com',
-  staging: 'openpracticelibraryteam@gmail.com',
-  production: 'openpracticelibraryteam@gmail.com',
-};
-const amaDestEmail = amaDestEmailMap[process.env.NODE_ENV];
-
-function emailPayload(entity) {
+function emailPayload(entity, baseUrl) {
   const html = (`
     <p>New Question: <a href="${baseUrl}/admin/plugins/content-manager/collectionType/application::questions.questions/${entity.id}?redirectUrl=/plugins/content-manager/collectionType/application::questions.questions">${entity.question}</a>
     <p><a href="${baseUrl}/admin/plugins/content-manager/collectionType/application::answers.answers">Create Answer</a>
@@ -44,9 +30,9 @@ module.exports = {
       entity = await strapi.services.questions.create(ctx.request.body);
     }
 
-    const message = emailPayload(entity);
+    const message = emailPayload(entity, process.env.OPL_CONTENT_API_BASE_URL);
     await strapi.plugins['email'].services.email.send({
-      to: amaDestEmail,
+      to: process.env.AMA_DEST_EMAIL,
       subject: 'OPL AMA New Question',
       text: message.text,
       html: message.html,
