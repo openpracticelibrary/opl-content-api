@@ -30,13 +30,18 @@ module.exports = {
       entity = await strapi.services.questions.create(ctx.request.body);
     }
 
-    const message = emailPayload(entity, process.env.OPL_CONTENT_API_BASE_URL);
-    await strapi.plugins['email'].services.email.send({
-      to: process.env.AMA_DEST_EMAIL,
-      subject: 'OPL AMA New Question',
-      text: message.text,
-      html: message.html,
-    });
+    // only send email if destination email and sendgrid key are specified in envrionment
+    if (process.env.AMA_DEST_EMAIL && process.env.SENDGRID_API_KEY) {
+      const message = emailPayload(entity, process.env.OPL_CONTENT_API_BASE_URL);
+      await strapi.plugins['email'].services.email.send({
+        to: process.env.AMA_DEST_EMAIL,
+        subject: 'OPL AMA New Question',
+        text: message.text,
+        html: message.html,
+      });
+    } else {
+      console.log(`WARN: AMA email not sent: check for empty environment variables AMA_DEST_EMAIL=(${process.env.AMA_DEST_EMAIL}) or SENDGRID_API_KEY (exists? ${process.env.SENDGRID_API_KEY ? 'true' : 'false'})`);
+    }
 
     return sanitizeEntity(entity, { model: strapi.models.questions });
   },
