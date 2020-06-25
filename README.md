@@ -15,6 +15,14 @@ You will also need a MongoDB running locally or on a host you can reach from you
 
 Mongo running in a container is suggested (use [podman](https://podman.io/getting-started/installation) or [docker](https://docs.docker.com/get-docker/)).
 
+Environment variables are required to configure this service to send an email to curators when an AMA question is submitted.  
+```
+OPL_CONTENT_API_BASE_URL=http://localhost:1337
+SENDGRID_API_KEY=insert-real-sendgrid-key-here
+AMA_DEST_EMAIL=jibarton@redhat.com
+```
+If these aren't configured, the service will create the question and log a warning on the email send.
+
 You can run the application locally by cloning the repo and running:
 ```
 npm install
