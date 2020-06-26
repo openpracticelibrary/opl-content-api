@@ -58,7 +58,7 @@ module.exports = {
       .match(matches())
       .skip(start)
       .limit(limit)
-      .sort(aggSort)
+      .sort(aggSort);
 
     const entities = practiceAggregate.map(result => {
       if (result) {
