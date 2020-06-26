@@ -51,7 +51,7 @@ module.exports = {
       { $lookup: { from: 'users-permissions_user', localField: 'authors', foreignField: '_id', as: 'authors' } },
     ];
 
-    const oneQuery = await strapi
+    const practiceAggregate = await strapi
       .query('practice')
       .model
       .aggregate(findQueryPopulateOptions)
@@ -60,7 +60,7 @@ module.exports = {
       .limit(limit)
       .sort(aggSort)
 
-    const entities = oneQuery.map(result => {
+    const entities = practiceAggregate.map(result => {
       if (result) {
         result.body = result.body[0];
         return result;
