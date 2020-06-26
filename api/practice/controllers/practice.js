@@ -5,50 +5,73 @@
  * to customize this controller
  */
 
-const { sanitizeEntity } = require('strapi-utils');
-const util = require('util');
-
-function getUrlVariable(url, query) {
-  url = url.replace(/.*?\?/, '');
-  url = url.replace(/_&_/, '_%26_');
-  var vars = url.split('&');
-  for (var i = 0; i < vars.length; i++) {
-    var pair = vars[i].split('=');
-    if (decodeURIComponent(pair[0]) == query) {
-      return decodeURIComponent(pair[1]);
-    }
-  }
-  console.log('Query variable %s not found', query);
-}
-
-function mergeArrays(...arrays) {
-  let jointArray = [];
-  arrays.forEach(array => {
-    jointArray = [...jointArray, ...array];
-  });
-
-  const mergeMap = new Map(jointArray.map(p => [p._id.toString(), p]));
-  return mergeMap.values();
-}
-
 module.exports = {
-  // findByKeyword returns all practices with text matching "keyword" in either the title, subtitle,
-  // or tags associated with the practice
-  async findByKeyword(ctx) {
-    //console.debug('DEBUG findByKeyword: ' + util.inspect(ctx, false, null, true));
-    const searchKeyword = getUrlVariable(ctx.context.request.url, '_keyword');
-    console.info(`INFO findByKeyword: ${ctx.context.request.url} keyword: ${searchKeyword}`);
+  /** findByKeyword returns all practices with text matching "keyword" in either the title, subtitle,
+   *  or body associated with the practice. Can sort, paginate, and search by tags, as well.
+   *  @param options Object The options object passed into the resolver by the web server
+   *  @returns entities The query results, filtered and sorted
+   */
+  async findByKeyword(options) {
+    const { sort = 'upvotes:desc', start = 0, limit = 100, tags = [], keyword = [] } = options;
 
-    const findQueryPopulateOptions = 
+    let searchKeyword;
+    if (keyword && keyword.length > 0) {
+      searchKeyword = keyword.flatMap(word => ([
+        { title: { $regex: word, $options: 'i' } },
+        { subtitle: { $regex: word, $options: 'i' } },
+        { 'body.0.whatIs': { $regex: `${word}`, $options: 'i' } },
+        { 'body.0.whyDo': { $regex: `${word}`, $options: 'i' } },
+        { 'body.0.howTo': { $regex: `${word}`, $options: 'i' } }
+      ]));
+
+      console.info(`INFO findByKeyword: ${keyword}`);
+    }
+
+    let tagSearch;
+    if (tags && tags.length > 0) {
+      tagSearch = tags.map(t => ({ $elemMatch: { tag: t } }));
+    }
+
+    const matches = () => {
+      if (searchKeyword && tagSearch) return { $or: searchKeyword, tags: { $all: tagSearch } };
+      if (searchKeyword) return { $or: searchKeyword };
+      if (tagSearch) return { tags: { $all: tagSearch } };
+
+      return {};
+    };
+
+    const aggSortOptions = sort.split(':');
+    const aggSort = { [aggSortOptions[0]]: aggSortOptions[1].toLowerCase() };
+
+    // populate referenced fields
+    const findQueryPopulateOptions =
     [
-      { path: 'tags' },
-      { path: 'authors' },
-      { path: 'ama' },
+      { $lookup: { from: 'components_practice_body_bodies', localField: 'body.ref', foreignField: '_id', as: 'body' } },
+      { $lookup: { from: 'components_practice_body_media_galleries', localField: 'mediaGallery.ref', foreignField: '_id', as: 'mediaGallery' } },
+      { $lookup: { from: 'components_practice_body_resources', localField: 'resources.ref', foreignField: '_id', as: 'resources' } },
+      { $lookup: { from: 'tags', localField: 'tags', foreignField: '_id', as: 'tags' } },
+      { $lookup: { from: 'questions', localField: 'ama', foreignField: '_id', as: 'ama' } },
+      { $lookup: { from: 'users-permissions_user', localField: 'authors', foreignField: '_id', as: 'authors' } },
     ];
 
-    const titleMatches = await strapi.query('practice').find({title_contains: searchKeyword}, findQueryPopulateOptions);
-    const subtitleMatches = await strapi.query('practice').find({subtitle_contains: searchKeyword}, findQueryPopulateOptions);
-    const tag = await strapi.query('tags').findOne({ tag: searchKeyword });
-    return mergeArrays(titleMatches, subtitleMatches, tag ? tag.practices : []);
+    const practiceAggregate = await strapi
+      .query('practice')
+      .model
+      .aggregate(findQueryPopulateOptions)
+      .match(matches())
+      .skip(start)
+      .limit(limit)
+      .sort(aggSort);
+
+    const entities = practiceAggregate.map(result => {
+      if (result) {
+        result.body = result.body[0];
+        return result;
+      }
+
+      return null;
+    });
+
+    return entities;
   },
 };
