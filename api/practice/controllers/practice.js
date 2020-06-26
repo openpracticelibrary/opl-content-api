@@ -6,8 +6,11 @@
  */
 
 module.exports = {
-  // findByKeyword returns all practices with text matching "keyword" in either the title, subtitle,
-  // or tags associated with the practice
+  /** findByKeyword returns all practices with text matching "keyword" in either the title, subtitle,
+   *  or body associated with the practice. Can sort, paginate, and search by tags, as well.
+   *  @param options Object The options object passed into the resolver by the web server
+   *  @returns entities The query results, filtered and sorted
+   */
   async findByKeyword(options) {
     const { sort = 'upvotes:desc', start = 0, limit = 100, tags = [], keyword = [] } = options;
 
